@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('page_title', 'User Profile - '.$user->name)
+@section('page_title', 'Profil Utilisateur - '.$user->name)
 @section('content')
     <div class="row">
         <div class="col-md-3 text-center">
             <div class="card">
                 <div class="card-body">
-                    <img style="width: 90%; height:90%" src="{{ $user->photo }}" alt="photo" class="rounded-circle">
+                    <img src="{{ $user->photo }}" alt="photo" class="rounded-circle" style="width: 50%; height: 50%;">
                     <br>
                     <h3 class="mt-3">{{ $user->name }}</h3>
                 </div>
@@ -52,13 +52,13 @@
                                 @if($user->phone)
                                     <tr>
                                         <td class="font-weight-bold">Phone</td>
-                                        <td>{{$user->phone.' '.$user->phone2 }}</td>
+                                        <td>{{$user->phone.'  '.$user->phone2 }}</td>
                                     </tr>
                                 @endif
-                                <tr>
+                                {{-- <tr>
                                     <td class="font-weight-bold">Birthday</td>
                                     <td>{{$user->dob }}</td>
-                                </tr>
+                                </tr> --}}
                                 @if($user->bg_id)
                                     <tr>
                                         <td class="font-weight-bold">Blood Group</td>

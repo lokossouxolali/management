@@ -77,8 +77,14 @@ class UserController extends Controller
         $user_is_staff = in_array($user_type, Qs::getStaff());
         $user_is_teamSA = in_array($user_type, Qs::getTeamSA());
 
-        $staff_id = Qs::getAppCode().'/STAFF/'.date('Y/m', strtotime($req->emp_date)).'/'.mt_rand(1000, 9999);
-        $data['username'] = $uname = ($user_is_teamSA) ? $req->username : $staff_id;
+        if ($user_is_teamSA && !empty($req->username)) {
+            $data['username'] = $uname = $req->username;
+        } else {
+            // Génère un username plus court, par exemple: user2307-1234
+            $short_date = date('ym', strtotime($req->emp_date)); // y = année sur 2 chiffres, m = mois
+            $data['username'] = $uname = 'user' . $short_date . '-' . mt_rand(1000, 9999);
+        }
+
 
         $pass = $req->password ?: $user_type;
         $data['password'] = Hash::make($pass);
@@ -89,6 +95,10 @@ class UserController extends Controller
             $f['name'] = 'photo.' . $f['ext'];
             $f['path'] = $photo->storeAs(Qs::getUploadPath($user_type).$data['code'], $f['name']);
             $data['photo'] = asset('storage/' . $f['path']);
+        }
+
+        if (User::where('username', $uname)->exists()) {
+            return back()->with('flash_warning', 'Ce nom d’utilisateur existe déjà. Veuillez réessayer.');
         }
 
         /* Ensure that both username and Email are not blank*/
@@ -128,11 +138,12 @@ class UserController extends Controller
         $data['name'] = ucwords($req->name);
         $data['user_type'] = $user_type;
 
-        if($user_is_staff && !$user_is_teamSA){
-            $data['username'] = Qs::getAppCode().'/STAFF/'.date('Y/m', strtotime($req->emp_date)).'/'.mt_rand(1000, 9999);
-        }
-        else {
-            $data['username'] = $user->username;
+        if ($user_is_teamSA && !empty($req->username)) {
+            $data['username'] = $uname = $req->username;
+        } else {
+            // Génère un username plus court, par exemple: user2307-1234
+            $short_date = date('ym', strtotime($req->emp_date)); // y = année sur 2 chiffres, m = mois
+            $data['username'] = $uname = 'user' . $short_date . '-' . mt_rand(1000, 9999);
         }
 
         if($req->hasFile('photo')) {
@@ -141,6 +152,10 @@ class UserController extends Controller
             $f['name'] = 'photo.' . $f['ext'];
             $f['path'] = $photo->storeAs(Qs::getUploadPath($user_type).$user->code, $f['name']);
             $data['photo'] = asset('storage/' . $f['path']);
+        }
+
+        if (User::where('username', $uname)->exists()) {
+            return back()->with('flash_warning', 'Ce nom d’utilisateur existe déjà. Veuillez réessayer.');
         }
 
         $this->user->update($id, $data);   /* UPDATE USER RECORD */
