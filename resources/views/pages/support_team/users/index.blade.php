@@ -25,13 +25,13 @@
                 <div class="tab-pane fade show active" id="new-user">
                     <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-store" action="{{ route('users.store') }}" data-fouc>
                         @csrf
-                    <h6>Personal Data</h6>
+                    <h6>Informations Personnelles</h6>
                         <fieldset>
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="user_type"> Select User: <span class="text-danger">*</span></label>
-                                        <select required data-placeholder="Select User" class="form-control select" name="user_type" id="user_type">
+                                        <label for="user_type"> Type d'utilisateur: <span class="text-danger">*</span></label>
+                                        <select required data-placeholder="Type d'utilisateur" class="form-control select" name="user_type" id="user_type">
                                 @foreach($user_types as $ut)
                                     <option value="{{ Qs::hash($ut->id) }}">{{ $ut->name }}</option>
                                 @endforeach
@@ -41,8 +41,8 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Full Name: <span class="text-danger">*</span></label>
-                                        <input value="{{ old('name') }}" required type="text" name="name" placeholder="Full Name" class="form-control">
+                                        <label>Nom Complet: <span class="text-danger">*</span></label>
+                                        <input value="{{ old('name') }}" required type="text" name="name" placeholder="Nom Complet" class="form-control">
                                     </div>
                                 </div>
 
@@ -71,15 +71,15 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Phone:</label>
-                                        <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="+2341234567" >
+                                        <label>Fix:</label>
+                                        <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="+22897857645" >
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Telephone:</label>
-                                        <input value="{{ old('phone2') }}" type="text" name="phone2" class="form-control" placeholder="+2341234567" >
+                                        <input value="{{ old('phone2') }}" type="text" name="phone2" class="form-control" placeholder="+22897857645" >
                                     </div>
                                 </div>
 

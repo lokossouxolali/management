@@ -16,7 +16,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nom Complet: <span class="text-danger">*</span></label>
-                                <input value="{{ old('name') }}" required type="text" name="name" placeholder="Full Name" class="form-control">
+                                <input value="{{ old('name') }}" required type="text" name="name" placeholder="Nom Complet" class="form-control">
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Téléphone:</label>
+                                <label>Fix:</label>
                                 <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="" >
                             </div>
                         </div>

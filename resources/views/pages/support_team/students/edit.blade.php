@@ -11,13 +11,13 @@
 
             <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-update" data-reload="#ajax-title" action="{{ route('students.update', Qs::hash($sr->id)) }}" data-fouc>
                 @csrf @method('PUT')
-                <h6>Personal data</h6>
+                <h6>Informations Personnelles</h6>
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Full Name: <span class="text-danger">*</span></label>
-                                <input value="{{ $sr->user->name }}" required type="text" name="name" placeholder="Full Name" class="form-control">
+                                <label>Nom Complet: <span class="text-danger">*</span></label>
+                                <input value="{{ $sr->user->name }}" required type="text" name="name" placeholder="Nom Complet" class="form-control">
                             </div>
                         </div>
 
@@ -50,7 +50,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Phone:</label>
+                                <label>Fix:</label>
                                 <input value="{{ $sr->user->phone  }}" type="text" name="phone" class="form-control" placeholder="" >
                             </div>
                         </div>

@@ -11,12 +11,12 @@
         <div class="card-body">
             <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-update" action="{{ route('users.update', Qs::hash($user->id)) }}" data-fouc>
                 @csrf @method('PUT')
-                <h6>Personal Data</h6>
+                <h6>Informations Personnelles</h6>
                 <fieldset>
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="user_type"> Select User: <span class="text-danger">*</span></label>
+                                <label for="user_type"> Type d'utilisateur: <span class="text-danger">*</span></label>
                                 <select disabled="disabled" class="form-control select" id="user_type">
                                     <option value="">{{ strtoupper($user->user_type) }}</option>
                                 </select>
@@ -25,8 +25,8 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Full Name: <span class="text-danger">*</span></label>
-                                <input value="{{ $user->name }}" required type="text" name="name" placeholder="Full Name" class="form-control">
+                                <label>Nom Complet: <span class="text-danger">*</span></label>
+                                <input value="{{ $user->name }}" required type="text" name="name" placeholder="Nom Complet" class="form-control">
                             </div>
                         </div>
 
@@ -48,7 +48,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Phone:</label>
+                                <label>Fix:</label>
                                 <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" placeholder="" >
                             </div>
                         </div>
