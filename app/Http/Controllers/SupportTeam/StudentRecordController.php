@@ -50,36 +50,47 @@ class StudentRecordController extends Controller
 
     public function store(StudentRecordCreate $req)
     {
-       $data =  $req->only(Qs::getUserRecord());
-       $sr =  $req->only(Qs::getStudentData());
+        $data = $req->only(Qs::getUserRecord());
+        $sr = $req->only(Qs::getStudentData());
 
         $ct = $this->my_class->findTypeByClass($req->my_class_id)->code;
-       /* $ct = ($ct == 'J') ? 'JSS' : $ct;
-        $ct = ($ct == 'S') ? 'SS' : $ct;*/
+        $ct = strtoupper($ct);
 
         $data['user_type'] = 'student';
         $data['name'] = ucwords($req->name);
         $data['code'] = strtoupper(Str::random(10));
         $data['password'] = Hash::make('student');
         $data['photo'] = Qs::getDefaultUserImage();
-        $adm_no = $req->adm_no;
-        $data['username'] = strtoupper(Qs::getAppCode().'/'.$ct.'/'.$sr['year_admitted'].'/'.($adm_no ?: mt_rand(1000, 99999)));
 
-        if($req->hasFile('photo')) {
+        // Génération sécurisée de username / adm_no
+        if (!empty($req->adm_no)) {
+            $username = strtoupper(Qs::getAppCode() . '/' . $ct . '/' . $sr['year_admitted'] . '/' . $req->adm_no);
+        } else {
+            do {
+                $rand = mt_rand(1000, 99999);
+                $username = strtoupper(Qs::getAppCode() . '/' . $ct . '/' . $sr['year_admitted'] . '/' . $rand);
+            } while (User::where('username', $username)->exists());
+        }
+
+        $data['username'] = $username;
+
+        if ($req->hasFile('photo')) {
             $photo = $req->file('photo');
             $f = Qs::getFileMetaData($photo);
             $f['name'] = 'photo.' . $f['ext'];
-            $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$data['code'], $f['name']);
+            $f['path'] = $photo->storeAs(Qs::getUploadPath('student') . $data['code'], $f['name']);
             $data['photo'] = asset('storage/' . $f['path']);
         }
 
-        $user = $this->user->create($data); // Create User
+        // Création utilisateur
+        $user = $this->user->create($data);
 
+        // Enregistrement élève
         $sr['adm_no'] = $data['username'];
         $sr['user_id'] = $user->id;
         $sr['session'] = Qs::getSetting('current_session');
 
-        $this->student->createRecord($sr); // Create Student
+        $this->student->createRecord($sr);
         return Qs::jsonStoreOk();
     }
 
@@ -141,31 +152,35 @@ class StudentRecordController extends Controller
     public function update(StudentRecordUpdate $req, $sr_id)
     {
         $sr_id = Qs::decodeHash($sr_id);
-        if(!$sr_id){return Qs::goWithDanger();}
+        if (!$sr_id) {
+            return Qs::goWithDanger();
+        }
 
         $sr = $this->student->getRecord(['id' => $sr_id])->first();
-        $d =  $req->only(Qs::getUserRecord());
+        $d = $req->only(Qs::getUserRecord());
         $d['name'] = ucwords($req->name);
 
-        if($req->hasFile('photo')) {
+        if ($req->hasFile('photo')) {
             $photo = $req->file('photo');
             $f = Qs::getFileMetaData($photo);
             $f['name'] = 'photo.' . $f['ext'];
-            $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$sr->user->code, $f['name']);
+            $f['path'] = $photo->storeAs(Qs::getUploadPath('student') . $sr->user->code, $f['name']);
             $d['photo'] = asset('storage/' . $f['path']);
         }
 
-        $this->user->update($sr->user->id, $d); // Update User Details
+        // Mise à jour des infos utilisateur
+        $this->user->update($sr->user->id, $d);
 
+        // Mise à jour fiche élève
         $srec = $req->only(Qs::getStudentData());
+        $this->student->updateRecord($sr_id, $srec);
 
-        $this->student->updateRecord($sr_id, $srec); // Update St Rec
-
-        /*** If Class/Section is Changed in Same Year, Delete Marks/ExamRecord of Previous Class/Section ****/
+        // Suppression des notes si la classe change
         Mk::deleteOldRecord($sr->user->id, $srec['my_class_id']);
 
         return Qs::jsonUpdateOk();
     }
+
 
     public function destroy($st_id)
     {
