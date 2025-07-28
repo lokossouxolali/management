@@ -25,7 +25,7 @@
         // On a new line
         &.d-block {
             margin-left: 0;
-            
+
             &:before {
                 content: none;
             }
@@ -39,7 +39,12 @@
     }
 
     // Remove margin from headings
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin: 0;
     }
 }
@@ -50,7 +55,7 @@
     padding: 0 $page-header-padding-x;
 
     // With custom colored bottom border
-    &[class*=border-bottom-] + .breadcrumb-line {
+    &[class*=border-bottom-]+.breadcrumb-line {
         border-top: 0;
     }
 }
@@ -64,7 +69,7 @@
 .page-header-light {
     background-color: $page-header-light-bg;
     border-bottom: $page-header-border-width solid $page-header-light-border-color;
-    
+
     // Cover image
     &.has-cover {
         background: url(#{$img-path}/backgrounds/seamless.png); // feel free to change
@@ -78,17 +83,17 @@
     margin-bottom: $spacer;
 
     // Breadcrumbs
-    > .breadcrumb,
+    >.breadcrumb,
     .page-header-content .breadcrumb {
 
         // Links
-        > li > a,
-        > li + li:before {
+        >li>a,
+        >li+li:before {
             color: rgba($page-header-dark-color, 0.9);
         }
 
         // Hovered links
-        > li > a {
+        >li>a {
             @include hover-focus {
                 color: $page-header-dark-color;
                 opacity: 1;
@@ -96,14 +101,14 @@
         }
 
         // Active item
-        > .active {
+        >.active {
             color: rgba($page-header-dark-color, 0.5);
         }
     }
-    
+
     // Cover image
     &.has-cover {
-        background: url(#{$img-path}/login_cover.jpg); // feel free to change
+        background: url(#{$img-path}/login_cover.png); // feel free to change
         background-size: cover;
     }
 }

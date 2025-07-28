@@ -17,21 +17,21 @@
             <li class="nav-item dropdown">
                 <a href="{{ route('home') }}" class="navbar-nav-link">
                     <i class="icon-home"></i>
-                    <span class="d-md-none ml-2">Home</span>
+                    <span class="d-md-none ml-2">Acceuil</span>
                 </a>
             </li>
 
             <li class="nav-item dropdown">
                 <a href="{{ route('login') }}" class="navbar-nav-link">
                     <i class="icon-user-tie"></i>
-                    <span class="d-md-none ml-2">My Account</span>
+                    <span class="d-md-none ml-2">Mon compte</span>
                 </a>
             </li>
 
             <li class="nav-item dropdown">
                 <a href="#" class="navbar-nav-link">
                     <i class="icon-cog3"></i>
-                    <span class="d-md-none ml-2">Options</span>
+                    <span class="d-md-none ml-2">Parametres</span>
                 </a>
             </li>
         </ul>

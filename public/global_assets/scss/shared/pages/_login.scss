@@ -11,7 +11,7 @@
 
     // Cover image
     .login-cover {
-        background: url(#{$img-path}/login_cover.jpg) no-repeat;
+        background: url(#{$img-path}/login_cover.png) no-repeat;
         background-size: cover;
     }
 
@@ -25,6 +25,7 @@
                 &:first-child .nav-link {
                     border-top-left-radius: $card-inner-border-radius;
                 }
+
                 &:last-child .nav-link {
                     border-top-right-radius: $card-inner-border-radius;
                 }

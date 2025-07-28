@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <div class="text-center mb-3">
                                 <i class="icon-people icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i>
-                                <h5 class="mb-0">Login to your account</h5>
+                                <h5 class="mb-0">Se connecter</h5>
                                 <span class="d-block text-muted">Your credentials</span>
                             </div>
 
@@ -45,11 +45,11 @@
                                     </label>
                                 </div>
 
-                                <a href="{{ route('password.request') }}" class="ml-auto">Forgot password?</a>
+                                <a href="{{ route('password.request') }}" class="ml-auto" style="color: #eecf1ee8;">Forgot password?</a>
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
+                                <button type="submit" class="btn btn-primary btn-block" style="background-color: #eecf1ee8;">Sign in <i class="icon-circle-right2 ml-2"></i></button>
                             </div>
 
                            {{-- <div class="form-group">
