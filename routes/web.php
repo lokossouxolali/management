@@ -142,7 +142,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('subjects', 'SubjectController');
         Route::resource('grades', 'GradeController');
         Route::resource('exams', 'ExamController');
-        Route::resource('dorms', 'DormController');
+
         Route::resource('payments', 'PaymentController');
 
     });

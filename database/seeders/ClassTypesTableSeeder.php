@@ -8,24 +8,27 @@ use Illuminate\Support\Facades\DB;
 class ClassTypesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Exécute le remplissage de la table des types de classe.
      *
      * @return void
      */
     public function run()
     {
+        // Vide complètement la table
         DB::table('class_types')->delete();
 
-        $data = [
-            ['name' => 'Creche', 'code' => 'C'],
-            ['name' => 'Pre Nursery', 'code' => 'PN'],
-            ['name' => 'Nursery', 'code' => 'N'],
-            ['name' => 'Primary', 'code' => 'P'],
-            ['name' => 'Junior Secondary', 'code' => 'J'],
-            ['name' => 'Senior Secondary', 'code' => 'S'],
+        // Types de classes en français avec leurs codes
+        $typesDeClasse = [
+            ['name' => 'Crèche', 'code' => 'C'],
+            ['name' => 'Petite section', 'code' => 'PS'],
+            ['name' => 'Moyenne section', 'code' => 'MS'],
+            ['name' => 'Grande section', 'code' => 'GS'],
+            ['name' => 'Primaire', 'code' => 'P'],
+            ['name' => 'Collège (1er cycle)', 'code' => 'J'],
+            ['name' => 'Lycée (2e cycle)', 'code' => 'S'],
         ];
 
-        DB::table('class_types')->insert($data);
-
+        // Insertion dans la base de données
+        DB::table('class_types')->insert($typesDeClasse);
     }
 }

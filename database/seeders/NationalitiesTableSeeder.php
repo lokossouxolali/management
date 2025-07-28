@@ -1,25 +1,68 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Nationality;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 
 class NationalitiesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Remplit la table des nationalités avec des données en français.
      *
      * @return void
      */
     public function run()
     {
-        $nationals = array(
-            'Afghan', 'Albanian', 'Algerian', 'American', 'Andorran', 'Angolan', 'Antiguans', 'Argentinean', 'Armenian', 'Australian', 'Austrian', 'Azerbaijani', 'Bahamian', 'Bahraini', 'Bangladeshi', 'Barbadian', 'Barbudans', 'Batswana', 'Belarusian', 'Belgian', 'Belizean', 'Beninese', 'Bhutanese', 'Bolivian', 'Bosnian', 'Brazilian', 'British', 'Bruneian', 'Bulgarian', 'Burkinabe', 'Burmese', 'Burundian', 'Cambodian', 'Cameroonian', 'Canadian', 'Cape Verdean', 'Central African', 'Chadian', 'Chilean', 'Chinese', 'Colombian', 'Comoran', 'Congolese', 'Costa Rican', 'Croatian', 'Cuban', 'Cypriot', 'Czech', 'Danish', 'Djibouti', 'Dominican', 'Dutch', 'East Timorese', 'Ecuadorean', 'Egyptian', 'Emirian', 'Equatorial Guinean', 'Eritrean', 'Estonian', 'Ethiopian', 'Fijian', 'Filipino', 'Finnish', 'French', 'Gabonese', 'Gambian', 'Georgian', 'German', 'Ghanaian', 'Greek', 'Grenadian', 'Guatemalan', 'Guinea-Bissauan', 'Guinean', 'Guyanese', 'Haitian', 'Herzegovinian', 'Honduran', 'Hungarian', 'I-Kiribati', 'Icelander', 'Indian', 'Indonesian', 'Iranian', 'Iraqi', 'Irish', 'Israeli', 'Italian', 'Ivorian', 'Jamaican', 'Japanese', 'Jordanian', 'Kazakhstani', 'Kenyan', 'Kittian and Nevisian', 'Kuwaiti', 'Kyrgyz', 'Laotian', 'Latvian', 'Lebanese', 'Liberian', 'Libyan', 'Liechtensteiner', 'Lithuanian', 'Luxembourger', 'Macedonian', 'Malagasy', 'Malawian', 'Malaysian', 'Maldivan', 'Malian', 'Maltese', 'Marshallese', 'Mauritanian', 'Mauritian', 'Mexican', 'Micronesian', 'Moldovan', 'Monacan', 'Mongolian', 'Moroccan', 'Mosotho', 'Motswana', 'Mozambican', 'Namibian', 'Nauruan', 'Nepalese', 'New Zealander', 'Nicaraguan', 'Nigerian', 'Nigerien', 'North Korean', 'Northern Irish', 'Norwegian', 'Omani', 'Pakistani', 'Palauan', 'Panamanian', 'Papua New Guinean', 'Paraguayan', 'Peruvian', 'Polish', 'Portuguese', 'Qatari', 'Romanian', 'Russian', 'Rwandan', 'Saint Lucian', 'Salvadoran', 'Samoan', 'San Marinese', 'Sao Tomean', 'Saudi', 'Scottish', 'Senegalese', 'Serbian', 'Seychellois', 'Sierra Leonean', 'Singaporean', 'Slovakian', 'Slovenian', 'Solomon Islander', 'Somali', 'South African', 'South Korean', 'Spanish', 'Sri Lankan', 'Sudanese', 'Surinamer', 'Swazi', 'Swedish', 'Swiss', 'Syrian', 'Taiwanese', 'Tajik', 'Tanzanian', 'Thai', 'Togolese', 'Tongan', 'Trinidadian/Tobagonian', 'Tunisian', 'Turkish', 'Tuvaluan', 'Ugandan', 'Ukrainian', 'Uruguayan', 'Uzbekistani', 'Venezuelan', 'Vietnamese', 'Welsh', 'Yemenite', 'Zambian', 'Zimbabwean'
-        );
+        // Vide la table des nationalités avant d'insérer
+        DB::table('nationalities')->delete();
 
-        foreach ($nationals as $n) {
-            Nationality::create(['name' => $n]);
+        // Liste des nationalités traduites en français
+        $nationalites = [
+            'Afghane', 'Albanaise', 'Algérienne', 'Allemande', 'Américaine',
+            'Andorrane', 'Angolaise', 'Argentine', 'Arménienne', 'Australienne',
+            'Autrichienne', 'Azerbaïdjanaise', 'Bahreïnienne', 'Bangladaise',
+            'Barbadienne', 'Belge', 'Béninoise', 'Bhoutanaise', 'Biélorusse',
+            'Birmane', 'Bolivienne', 'Bosnienne', 'Botswanaise', 'Brésilienne',
+            'Britannique', 'Brunéienne', 'Bulgare', 'Burkinabè', 'Burundaise',
+            'Cambodgienne', 'Camerounaise', 'Canadienne', 'Cap-verdienne',
+            'Centrafricaine', 'Chilienne', 'Chinoise', 'Chypriote', 'Colombienne',
+            'Comorienne', 'Congolaise (RDC)', 'Congolaise (RC)', 'Costaricaine',
+            'Croate', 'Cubaine', 'Danoise', 'Djiboutienne', 'Dominicaine',
+            'Égyptienne', 'Émiratie', 'Équato-guinéenne', 'Équatorienne',
+            'Érythréenne', 'Espagnole', 'Estonienne', 'Éthiopienne', 'Finlandaise',
+            'Française', 'Gabonaise', 'Gambienne', 'Géorgienne', 'Ghanéenne',
+            'Grecque', 'Grenadienne', 'Guatémaltèque', 'Guinéenne',
+            'Guinéenne-Bissau', 'Guyanienne', 'Haïtienne', 'Hondurienne',
+            'Hongroise', 'Indienne', 'Indonésienne', 'Irakienne', 'Iranienne',
+            'Irlandaise', 'Islandaise', 'Israélienne', 'Italienne', 'Ivoirienne',
+            'Jamaïcaine', 'Japonaise', 'Jordanienne', 'Kazakhstanaise', 'Kenyane',
+            'Kirghize', 'Kiribatienne', 'Koweïtienne', 'Laotienne', 'Lesothane',
+            'Lettonne', 'Libanaise', 'Libérienne', 'Libyenne', 'Liechtensteinoise',
+            'Lituanienne', 'Luxembourgeoise', 'Macédonienne', 'Malaisienne',
+            'Malawienne', 'Maldivienne', 'Malienne', 'Maltaise', 'Marocaine',
+            'Mauricienne', 'Mauritanienne', 'Mexicaine', 'Micronésienne',
+            'Moldave', 'Monégasque', 'Mongole', 'Monténégrine', 'Mozambicaine',
+            'Namibienne', 'Nauruane', 'Népalaise', 'Néerlandaise', 'Néo-Zélandaise',
+            'Nicaraguayenne', 'Nigériane', 'Nigérienne', 'Norvégienne',
+            'Omanaise', 'Ougandaise', 'Ouzbèke', 'Pakistanaise', 'Palaosienne',
+            'Palestinienne', 'Panaméenne', 'Papouasienne', 'Paraguayenne',
+            'Péruvienne', 'Philippine', 'Polonaise', 'Portugaise', 'Qatarienne',
+            'Roumaine', 'Russe', 'Rwandaise', 'Saint-Lucienne', 'Salomonaise',
+            'Salvadorienne', 'Samoane', 'Saoudienne', 'Sénégalaise', 'Serbe',
+            'Seychelloise', 'Sierra-Léonaise', 'Singapourienne', 'Slovaque',
+            'Slovène', 'Somalienne', 'Soudanaise', 'Sri Lankaise', 'Suédoise',
+            'Suisse', 'Surinamaise', 'Swazie', 'Syrienne', 'Tadjike', 'Tanzanienne',
+            'Tchadienne', 'Tchèque', 'Thaïlandaise', 'Timoraise', 'Togolaise',
+            'Tonguienne', 'Trinidadienne', 'Tunisienne', 'Turkmène', 'Turque',
+            'Tuvaluane', 'Ukrainienne', 'Uruguayenne', 'Vanuataise', 'Vénézuélienne',
+            'Vietnamienne', 'Yéménite', 'Zambienne', 'Zimbabwéenne'
+        ];
+
+        // Insertion des données
+        foreach ($nationalites as $nom) {
+            Nationality::create(['name' => $nom]);
         }
     }
 }

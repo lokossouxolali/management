@@ -25,20 +25,28 @@ class SkillsTableSeeder extends Seeder
         $types = ['AF', 'PS']; // Affective & Psychomotor Traits/Skills
         $d = [
 
-            [ 'name' => 'PUNCTUALITY', 'skill_type' => $types[0] ],
-            [ 'name' => 'NEATNESS', 'skill_type' => $types[0] ],
-            [ 'name' => 'HONESTY', 'skill_type' => $types[0] ],
-            [ 'name' => 'RELIABILITY', 'skill_type' => $types[0] ],
-            [ 'name' => 'RELATIONSHIP WITH OTHERS', 'skill_type' => $types[0] ],
-            [ 'name' => 'POLITENESS', 'skill_type' => $types[0] ],
-            [ 'name' => 'ALERTNESS', 'skill_type' => $types[0] ],
-            [ 'name' => 'HANDWRITING', 'skill_type' => $types[1] ],
-            [ 'name' => 'GAMES & SPORTS', 'skill_type' => $types[1] ],
-            [ 'name' => 'DRAWING & ARTS', 'skill_type' => $types[1] ],
-            [ 'name' => 'PAINTING', 'skill_type' => $types[1] ],
-            [ 'name' => 'CONSTRUCTION', 'skill_type' => $types[1] ],
-            [ 'name' => 'MUSICAL SKILLS', 'skill_type' => $types[1] ],
-            [ 'name' => 'FLEXIBILITY', 'skill_type' => $types[1] ],
+            // Compétences affectives (comportement)
+            [ 'name' => 'PONCTUALITÉ', 'skill_type' => $types[0] ],
+            [ 'name' => 'SOIN ET ORDRE', 'skill_type' => $types[0] ],
+            [ 'name' => 'HONNÊTETÉ', 'skill_type' => $types[0] ],
+            [ 'name' => 'FIABILITÉ', 'skill_type' => $types[0] ],
+            [ 'name' => 'RELATIONS AVEC LES AUTRES', 'skill_type' => $types[0] ],
+            [ 'name' => 'POLITESSE', 'skill_type' => $types[0] ],
+            [ 'name' => 'ATTENTION ET CONCENTRATION', 'skill_type' => $types[0] ],
+            [ 'name' => 'AUTONOMIE', 'skill_type' => $types[0] ],
+            [ 'name' => 'RESPONSABILITÉ', 'skill_type' => $types[0] ],
+            [ 'name' => 'PARTICIPATION', 'skill_type' => $types[0] ],
+            
+            // Compétences psychomotrices (pratiques)
+            [ 'name' => 'ÉCRITURE', 'skill_type' => $types[1] ],
+            [ 'name' => 'SPORTS ET JEUX', 'skill_type' => $types[1] ],
+            [ 'name' => 'DESSIN ET ARTS PLASTIQUES', 'skill_type' => $types[1] ],
+            [ 'name' => 'PEINTURE', 'skill_type' => $types[1] ],
+            [ 'name' => 'CONSTRUCTION ET MANIPULATION', 'skill_type' => $types[1] ],
+            [ 'name' => 'COMPÉTENCES MUSICALES', 'skill_type' => $types[1] ],
+            [ 'name' => 'AGILITÉ ET FLEXIBILITÉ', 'skill_type' => $types[1] ],
+            [ 'name' => 'EXPRESSION ORALE', 'skill_type' => $types[1] ],
+            [ 'name' => 'UTILISATION DES OUTILS', 'skill_type' => $types[1] ],
 
         ];
         DB::table('skills')->insert($d);

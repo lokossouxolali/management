@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('page_title', 'Edit Exam - '.$ex->name. ' ('.$ex->year.')')
+@section('page_title', 'Modifier l\'Examen - '.$ex->name. ' ('.$ex->year.')')
 @section('content')
 
     <div class="card">

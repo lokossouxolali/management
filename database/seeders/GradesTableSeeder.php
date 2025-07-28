@@ -24,12 +24,12 @@ class GradesTableSeeder extends Seeder
 
         $d = [
 
-            ['name' => 'A', 'mark_from' => 70, 'mark_to' => 100, 'remark' => 'Excellent'],
-            ['name' => 'B', 'mark_from' => 60, 'mark_to' => 69, 'remark' => 'Very Good'],
-            ['name' => 'C', 'mark_from' => 50, 'mark_to' => 59, 'remark' => 'Good'],
-            ['name' => 'D', 'mark_from' => 45, 'mark_to' => 49, 'remark' => 'Pass'],
-            ['name' => 'E', 'mark_from' => 40, 'mark_to' => 44, 'remark' => 'Poor'],
-            ['name' => 'F', 'mark_from' => 0, 'mark_to' => 39, 'remark' => 'Fail'],
+            ['name' => 'A', 'mark_from' => 16, 'mark_to' => 20, 'remark' => 'Très Bien'],
+            ['name' => 'B', 'mark_from' => 14, 'mark_to' => 15, 'remark' => 'Bien'],
+            ['name' => 'C', 'mark_from' => 12, 'mark_to' => 13, 'remark' => 'Assez Bien'],
+            ['name' => 'D', 'mark_from' => 10, 'mark_to' => 11, 'remark' => 'Passable'],
+            ['name' => 'E', 'mark_from' => 8, 'mark_to' => 9, 'remark' => 'Insuffisant'],
+            ['name' => 'F', 'mark_from' => 0, 'mark_to' => 7, 'remark' => 'Très Insuffisant'],
 
 
         ];

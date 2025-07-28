@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Manage Users')
+@section('page_title', 'Gérer les Utilisateurs')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Manage Users</h6>
+                            <h6 class="card-title">Gérer les Utilisateurs</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 

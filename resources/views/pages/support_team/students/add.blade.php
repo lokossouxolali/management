@@ -1,28 +1,28 @@
 @extends('layouts.master')
-@section('page_title', 'Admit Student')
+@section('page_title', 'Inscrire un Élève')
 @section('content')
         <div class="card">
             <div class="card-header bg-white header-elements-inline">
-                <h6 class="card-title">Please fill The form Below To Admit A New Student</h6>
+                <h6 class="card-title">Veuillez remplir le formulaire ci-dessous pour inscrire un nouvel élève</h6>
 
                 {!! Qs::getPanelOptions() !!}
             </div>
 
             <form id="ajax-reg" method="post" enctype="multipart/form-data" class="wizard-form steps-validation" action="{{ route('students.store') }}" data-fouc>
                @csrf
-                <h6>Personal data</h6>
+                <h6>Données personnelles</h6>
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Full Name: <span class="text-danger">*</span></label>
+                                <label>Nom Complet: <span class="text-danger">*</span></label>
                                 <input value="{{ old('name') }}" required type="text" name="name" placeholder="Full Name" class="form-control">
                                 </div>
                             </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Address: <span class="text-danger">*</span></label>
+                                <label>Adresse: <span class="text-danger">*</span></label>
                                 <input value="{{ old('address') }}" class="form-control" placeholder="Address" name="address" type="text" required>
                             </div>
                         </div>
@@ -31,14 +31,14 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Email address: </label>
+                                <label>Adresse email: </label>
                                 <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email Address">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="gender">Gender: <span class="text-danger">*</span></label>
+                                <label for="gender">Genre: <span class="text-danger">*</span></label>
                                 <select class="select form-control" id="gender" name="gender" required data-fouc data-placeholder="Choose..">
                                     <option value=""></option>
                                     <option {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
@@ -49,14 +49,14 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Phone:</label>
+                                <label>Téléphone:</label>
                                 <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="" >
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Telephone:</label>
+                                <label>Téléphone:</label>
                                 <input value="{{ old('phone2') }}" type="text" name="phone2" class="form-control" placeholder="" >
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Date of Birth:</label>
+                                <label>Date de Naissance:</label>
                                 <input name="dob" value="{{ old('dob') }}" type="text" class="form-control date-pick" placeholder="Select Date...">
 
                             </div>
@@ -105,7 +105,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="bg_id">Blood Group: </label>
+                                <label for="bg_id">Groupe Sanguin: </label>
                                 <select class="select form-control" id="bg_id" name="bg_id" data-fouc data-placeholder="Choose..">
                                     <option value=""></option>
                                     @foreach(App\Models\BloodGroup::all() as $bg)
@@ -117,21 +117,21 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="d-block">Upload Passport Photo:</label>
+                                <label class="d-block">Télécharger Photo d'Identité:</label>
                                 <input value="{{ old('photo') }}" accept="image/*" type="file" name="photo" class="form-input-styled" data-fouc>
-                                <span class="form-text text-muted">Accepted Images: jpeg, png. Max file size 2Mb</span>
+                                <span class="form-text text-muted">Images acceptées: jpeg, png. Taille max: 2Mb</span>
                             </div>
                         </div>
                     </div>
 
                 </fieldset>
 
-                <h6>Student Data</h6>
+                <h6>Données de l'Élève</h6>
                 <fieldset>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="my_class_id">Class: <span class="text-danger">*</span></label>
+                                <label for="my_class_id">Classe: <span class="text-danger">*</span></label>
                                 <select onchange="getClassSections(this.value)" data-placeholder="Choose..." required name="my_class_id" id="my_class_id" class="select-search form-control">
                                     <option value=""></option>
                                     @foreach($my_classes as $c)
@@ -164,7 +164,7 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="year_admitted">Year Admitted: <span class="text-danger">*</span></label>
+                                <label for="year_admitted">Année d'Admission: <span class="text-danger">*</span></label>
                                 <select data-placeholder="Choose..." required name="year_admitted" id="year_admitted" class="select-search form-control">
                                     <option value=""></option>
                                     @for($y=date('Y', strtotime('- 10 years')); $y<=date('Y'); $y++)
@@ -175,36 +175,19 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="dorm_id">Dormitory: </label>
-                            <select data-placeholder="Choose..."  name="dorm_id" id="dorm_id" class="select-search form-control">
-                                <option value=""></option>
-                                @foreach($dorms as $d)
-                                    <option {{ (old('dorm_id') == $d->id) ? 'selected' : '' }} value="{{ $d->id }}">{{ $d->name }}</option>
-                                    @endforeach
-                            </select>
 
-                        </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Dormitory Room No:</label>
-                                <input type="text" name="dorm_room_no" placeholder="Dormitory Room No" class="form-control" value="{{ old('dorm_room_no') }}">
+                                <label>Maison Sportive:</label>
+                                <input type="text" name="house" placeholder="Maison Sportive" class="form-control" value="{{ old('house') }}">
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Sport House:</label>
-                                <input type="text" name="house" placeholder="Sport House" class="form-control" value="{{ old('house') }}">
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Admission Number:</label>
-                                <input type="text" name="adm_no" placeholder="Admission Number" class="form-control" value="{{ old('adm_no') }}">
+                                <label>Numéro d'Admission:</label>
+                                <input type="text" name="adm_no" placeholder="Numéro d'Admission" class="form-control" value="{{ old('adm_no') }}">
                             </div>
                         </div>
                     </div>

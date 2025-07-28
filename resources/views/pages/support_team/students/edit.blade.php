@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Edit Student')
+@section('page_title', 'Modifier l\'Élève')
 @section('content')
 
         <div class="card">
             <div class="card-header bg-white header-elements-inline">
-                <h6 id="ajax-title" class="card-title">Please fill The form Below To Edit record of {{ $sr->user->name }}</h6>
+                <h6 id="ajax-title" class="card-title">Veuillez remplir le formulaire ci-dessous pour modifier le dossier de {{ $sr->user->name }}</h6>
 
                 {!! Qs::getPanelOptions() !!}
             </div>
@@ -178,25 +178,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="dorm_id">Dormitory: </label>
-                            <select data-placeholder="Choose..."  name="dorm_id" id="dorm_id" class="select-search form-control">
-                                <option value=""></option>
-                                @foreach($dorms as $d)
-                                    <option {{ ($sr->dorm_id == $d->id) ? 'selected' : '' }} value="{{ $d->id }}">{{ $d->name }}</option>
-                                @endforeach
-                            </select>
 
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Dormitory Room No:</label>
-                                <input type="text" name="dorm_room_no" placeholder="Dormitory Room No" class="form-control" value="{{ $sr->dorm_room_no }}">
-                            </div>
-                        </div>
-                    </div>
                 </fieldset>
 
             </form>
