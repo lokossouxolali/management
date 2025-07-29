@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class StudentRecordController extends Controller
 {
@@ -82,16 +83,29 @@ class StudentRecordController extends Controller
             $data['photo'] = asset('storage/' . $f['path']);
         }
 
-        // Création utilisateur
-        $user = $this->user->create($data);
+        DB::beginTransaction();
+        try {
+            // Création utilisateur
+            $user = $this->user->create($data);
 
-        // Enregistrement élève
-        $sr['adm_no'] = $data['username'];
-        $sr['user_id'] = $user->id;
-        $sr['session'] = Qs::getSetting('current_session');
+            // Enregistrement élève
+            $sr['adm_no'] = $data['username'];
+            $sr['user_id'] = $user->id;
+            $sr['session'] = Qs::getSetting('current_session');
 
-        $this->student->createRecord($sr);
-        return Qs::jsonStoreOk();
+            $this->student->createRecord($sr);
+            DB::commit();
+            return Qs::jsonStoreOk();
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            if ($e->getCode() == 23000) {
+                return back()->with('flash_danger', 'Numéro d’admission ou email déjà utilisé.');
+            }
+            return back()->with('flash_danger', 'Erreur système. Veuillez contacter l’administrateur.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('flash_danger', 'Erreur système. Veuillez contacter l’administrateur.');
+        }
     }
 
     public function listByClass($class_id)

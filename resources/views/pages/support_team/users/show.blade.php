@@ -5,7 +5,7 @@
         <div class="col-md-3 text-center">
             <div class="card">
                 <div class="card-body">
-                    <img src="{{ $user->photo }}" alt="photo" class="rounded-circle" style="width: 50%; height: 50%;">
+                    <img src="{{ $user->photo }}" alt="photo" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
                     <br>
                     <h3 class="mt-3">{{ $user->name }}</h3>
                 </div>
