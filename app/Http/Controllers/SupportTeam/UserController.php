@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
@@ -105,6 +106,7 @@ class UserController extends Controller
             return back()->with('pop_error', __('msg.user_invalid'));
         }
 
+        DB::beginTransaction();
         try {
             $user = $this->user->create($data); // Création utilisateur
 
@@ -116,12 +118,17 @@ class UserController extends Controller
                 $this->user->createStaffRecord($d2);
             }
 
+            DB::commit();
             return Qs::jsonStoreOk();
 
         } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
             if ($e->getCode() == 23000) {
                 return back()->with('flash_danger', 'Nom d’utilisateur ou email déjà utilisé.');
             }
+            return back()->with('flash_danger', 'Erreur système. Veuillez contacter l’administrateur.');
+        } catch (\Exception $e) {
+            DB::rollBack();
             return back()->with('flash_danger', 'Erreur système. Veuillez contacter l’administrateur.');
         }
     }
