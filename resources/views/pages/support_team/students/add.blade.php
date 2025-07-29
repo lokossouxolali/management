@@ -181,13 +181,11 @@
 
 
 
-                        <div class="col-md-3">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Numéro d'Admission:</label>
                                 <small class="text-muted">
-                                    <i class="icon-info22"></i> 
-                                    Le numéro d'admission est générer automatiquement par le systeme : <strong>CODE/CLASSE/ANNEE/NUMERO</strong><br>
-                                    <span class="text-info">Exemple: CSL/J1/2024/0001</span>
+                                    <i class="icon-info22"></i>Le numéro d'admission est générer automatiquement par le systeme : <strong>CODE/CLASSE/ANNEE/NUMERO</strong><span class="text-info">Exemple: CSL/J1/2024/0001</span>
                                 </small>
                             </div>
                         </div>
