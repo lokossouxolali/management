@@ -29,12 +29,14 @@ class SettingsTableSeeder extends Seeder
             ['type' => 'email_pass', 'description' => ''],
             ['type' => 'lock_exam', 'description' => 0],
             ['type' => 'logo', 'description' => ''],
-            ['type' => 'next_term_fees_j', 'description' => '2500'],
-            ['type' => 'next_term_fees_pn', 'description' => '3000'],
-            ['type' => 'next_term_fees_p', 'description' => '3500'],
-            ['type' => 'next_term_fees_n', 'description' => '4000'],
-            ['type' => 'next_term_fees_s', 'description' => '4500'],
-            ['type' => 'next_term_fees_c', 'description' => '2000'],
+            // Frais pour tous les types de classes
+            ['type' => 'next_term_fees_c', 'description' => '1500'],    // Crèche
+            ['type' => 'next_term_fees_ps', 'description' => '2000'],   // Petite section
+            ['type' => 'next_term_fees_ms', 'description' => '2200'],   // Moyenne section
+            ['type' => 'next_term_fees_gs', 'description' => '2500'],   // Grande section
+            ['type' => 'next_term_fees_p', 'description' => '3000'],    // Primaire
+            ['type' => 'next_term_fees_j', 'description' => '3500'],    // Collège
+            ['type' => 'next_term_fees_s', 'description' => '4000'],    // Lycée
         ];
 
         DB::table('settings')->insert($data);

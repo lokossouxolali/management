@@ -24,7 +24,29 @@ class SettingController extends Controller
          $d['class_types'] = $this->my_class->getTypes();
          $d['s'] = $s->flatMap(function($s){
             return [$s->type => $s->description];
-        });
+        })->toArray();
+        
+        // S'assurer que toutes les clés nécessaires existent
+        $required_keys = [
+            'system_name', 'system_title', 'current_session', 'term_ends', 'term_begins',
+            'phone', 'address', 'system_email', 'alt_email', 'email_host', 'email_pass',
+            'lock_exam', 'logo'
+        ];
+        
+        foreach ($required_keys as $key) {
+            if (!isset($d['s'][$key])) {
+                $d['s'][$key] = '';
+            }
+        }
+        
+        // S'assurer que les clés de frais existent pour tous les types de classes
+        foreach ($d['class_types'] as $class_type) {
+            $fee_key = 'next_term_fees_' . strtolower($class_type->code);
+            if (!isset($d['s'][$fee_key])) {
+                $d['s'][$fee_key] = '';
+            }
+        }
+        
         return view('pages.super_admin.settings', $d);
     }
 

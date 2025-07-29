@@ -179,15 +179,9 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Maison Sportive:</label>
-                                <input type="text" name="house" placeholder="Maison Sportive" class="form-control" value="{{ old('house') }}">
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
                                 <label>Numéro d'Admission:</label>
-                                <input type="text" name="adm_no" placeholder="Numéro d'Admission" class="form-control" value="{{ old('adm_no') }}">
+                                <input type="text" name="adm_no" placeholder="Numéro d'Admission (optionnel)" class="form-control" value="{{ old('adm_no') }}">
+                                <small class="text-muted">Laissez vide pour génération automatique</small>
                             </div>
                         </div>
                     </div>
