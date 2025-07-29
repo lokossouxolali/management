@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'My Children')
+@section('page_title', 'Mes enfants')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">My Children</h6>
+            <h6 class="card-title">Mes enfants</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
@@ -12,12 +12,12 @@
             <table class="table datatable-button-html5-columns">
                 <thead>
                 <tr>
-                    <th>S/N</th>
+                    <th>N°</th>
                     <th>Photo</th>
-                    <th>Name</th>
-                    <th>ADM_No</th>
-                    <th>Section</th>
-                    <th>Email</th>
+                    <th>Nom</th>
+                    <th>N° d'admission</th>
+                    <th>Classe</th>
+                    <th>E-mail</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -38,8 +38,8 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left">
-                                        <a href="{{ route('students.show', Qs::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
-                                        <a target="_blank" href="{{ route('marks.year_selector', Qs::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
+                                        <a href="{{ route('students.show', Qs::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> Voir le profil</a>
+                                        <a target="_blank" href="{{ route('marks.year_selector', Qs::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Bulletin</a>
 
                                     </div>
                                 </div>

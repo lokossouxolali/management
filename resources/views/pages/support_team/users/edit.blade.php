@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Edit User')
+@section('page_title', "Modifier l'utilisateur")
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Edit User Details</h6>
+            <h6 class="card-title">Modifier les informations de l'utilisateur</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
@@ -32,8 +32,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Address: <span class="text-danger">*</span></label>
-                                <input value="{{ $user->address }}" class="form-control" placeholder="Address" name="address" type="text" required>
+                                <label>Adresse: <span class="text-danger">*</span></label>
+                                <input value="{{ $user->address }}" class="form-control" placeholder="Adresse" name="address" type="text" required>
                             </div>
                         </div>
                     </div>
@@ -75,19 +75,19 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="gender">Gender: <span class="text-danger">*</span></label>
-                                <select class="select form-control" id="gender" name="gender" required data-fouc data-placeholder="Choose..">
+                                <label for="gender">Genre: <span class="text-danger">*</span></label>
+                                <select class="select form-control" id="gender" name="gender" required data-fouc data-placeholder="Choisir..">
                                     <option value=""></option>
-                                    <option {{ ($user->gender == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                                    <option {{ ($user->gender == 'Female') ? 'selected' : '' }} value="Female">Female</option>
+                                    <option {{ ($user->gender == 'Male') ? 'selected' : '' }} value="Male">Homme</option>
+                                    <option {{ ($user->gender == 'Female') ? 'selected' : '' }} value="Female">Femme</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="nal_id">Nationality: <span class="text-danger">*</span></label>
-                                <select data-placeholder="Choose..." required name="nal_id" id="nal_id" class="select-search form-control">
+                                <label for="nal_id">Nationalité: <span class="text-danger">*</span></label>
+                                <select data-placeholder="Choisir..." required name="nal_id" id="nal_id" class="select-search form-control">
                                     <option value=""></option>
                                     @foreach($nationals as $nal)
                                         <option {{ ($user->nal_id == $nal->id) ? 'selected' : '' }} value="{{ $nal->id }}">{{ $nal->name }}</option>
@@ -99,8 +99,8 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="state_id">State: <span class="text-danger">*</span></label>
-                            <select onchange="getLGA(this.value)" required data-placeholder="Choose.." class="select-search form-control" name="state_id" id="state_id">
+                            <label for="state_id">État: <span class="text-danger">*</span></label>
+                            <select onchange="getLGA(this.value)" required data-placeholder="Choisir.." class="select-search form-control" name="state_id" id="state_id">
                                 <option value=""></option>
                                 @foreach($states as $st)
                                     <option {{ ($user->state_id == $st->id ? 'selected' : '') }} value="{{ $st->id }}">{{ $st->name }}</option>
@@ -110,15 +110,15 @@
 
                         <div class="col-md-4">
                             <label for="lga_id">LGA: <span class="text-danger">*</span></label>
-                            <select required data-placeholder="Select State First" class="select-search form-control" name="lga_id" id="lga_id">
+                            <select required data-placeholder="Sélectionner d'abord l'état" class="select-search form-control" name="lga_id" id="lga_id">
                                 <option value="{{ $user->lga_id ?? '' }}">{{ $user->lga->name ?? '' }}</option>
                             </select>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="bg_id">Blood Group: </label>
-                                <select class="select form-control" id="bg_id" name="bg_id" data-fouc data-placeholder="Choose..">
+                                <label for="bg_id">Groupe Sanguin: </label>
+                                <select class="select form-control" id="bg_id" name="bg_id" data-fouc data-placeholder="Choisir..">
                                     <option value=""></option>
                                     @foreach($blood_groups as $bg)
                                         <option {{ ($user->bg_id == $bg->id ? 'selected' : '') }} value="{{ $bg->id }}">{{ $bg->name }}</option>
@@ -133,9 +133,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="d-block">Upload Passport Photo:</label>
+                                <label class="d-block">Télécharger la photo du passeport:</label>
                                 <input value="{{ old('photo') }}" accept="image/*" type="file" name="photo" class="form-input-styled" data-fouc>
-                                <span class="form-text text-muted">Accepted Images: jpeg, png. Max file size 2Mb</span>
+                                <span class="form-text text-muted">Images acceptées: jpeg, png. Taille maximale du fichier 2Mo</span>
                             </div>
                         </div>
                     </div>

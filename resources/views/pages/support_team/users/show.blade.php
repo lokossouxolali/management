@@ -21,20 +21,20 @@
                     </ul>
 
                     <div class="tab-content">
-                        {{--Basic Info--}}
+                        {{--Infos de base--}}
                         <div class="tab-pane fade show active" id="basic-info">
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <td class="font-weight-bold">Name</td>
+                                    <td class="font-weight-bold">Nom</td>
                                     <td>{{ $user->name }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Gender</td>
+                                    <td class="font-weight-bold">Sexe</td>
                                     <td>{{ $user->gender }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Address</td>
+                                    <td class="font-weight-bold">Adresse</td>
                                     <td>{{ $user->address }}</td>
                                 </tr>
                                 @if($user->email)
@@ -45,13 +45,13 @@
                                 @endif
                                 @if($user->username)
                                     <tr>
-                                        <td class="font-weight-bold">Username</td>
+                                        <td class="font-weight-bold">Nom d'utilisateur</td>
                                         <td>{{$user->username }}</td>
                                     </tr>
                                 @endif
                                 @if($user->phone)
                                     <tr>
-                                        <td class="font-weight-bold">Phone</td>
+                                        <td class="font-weight-bold">Téléphone</td>
                                         <td>{{$user->phone.'  '.$user->phone2 }}</td>
                                     </tr>
                                 @endif
@@ -61,19 +61,19 @@
                                 </tr> --}}
                                 @if($user->bg_id)
                                     <tr>
-                                        <td class="font-weight-bold">Blood Group</td>
+                                        <td class="font-weight-bold">Groupe Sanguin</td>
                                         <td>{{$user->blood_group->name }}</td>
                                     </tr>
                                 @endif
                                 @if($user->nal_id)
                                     <tr>
-                                        <td class="font-weight-bold">Nationality</td>
+                                        <td class="font-weight-bold">Nationalité</td>
                                         <td>{{$user->nationality->name }}</td>
                                     </tr>
                                 @endif
                                 @if($user->state_id)
                                     <tr>
-                                        <td class="font-weight-bold">State</td>
+                                        <td class="font-weight-bold">État</td>
                                         <td>{{$user->state->name }}</td>
                                     </tr>
                                 @endif
@@ -85,7 +85,7 @@
                                 @endif
                                 @if($user->user_type == 'parent')
                                     <tr>
-                                        <td class="font-weight-bold">Children/Ward</td>
+                                        <td class="font-weight-bold">Enfants/Gardé</td>
                                         <td>
                                         @foreach(Qs::findMyChildren($user->id) as $sr)
                                             <span> - <a href="{{ route('students.show', Qs::hash($sr->id)) }}">{{ $sr->user->name.' - '.$sr->my_class->name. ' '.$sr->section->name }}</a></span><br>
@@ -97,7 +97,7 @@
 
                                 @if($user->user_type == 'teacher')
                                     <tr>
-                                        <td class="font-weight-bold">My Subjects</td>
+                                        <td class="font-weight-bold">Mes Sujets</td>
                                         <td>
                                             @foreach(Qs::findTeacherSubjects($user->id) as $sub)
                                                 <span> - {{ $sub->name.' ('.$sub->my_class->name.')' }}</span><br>
