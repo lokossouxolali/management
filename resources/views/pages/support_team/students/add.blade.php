@@ -185,7 +185,11 @@
                             <div class="form-group">
                                 <label>Numéro d'Admission:</label>
                                 <input type="text" name="adm_no" placeholder="Numéro d'Admission (optionnel)" class="form-control" value="{{ old('adm_no') }}">
-                                <small class="text-muted">Laissez vide pour génération automatique</small>
+                                <small class="text-muted">
+                                    <i class="icon-info22"></i> 
+                                    Laissez vide pour génération automatique au format: <strong>CODE/CLASSE/ANNEE/NUMERO</strong><br>
+                                    <span class="text-info">Exemple: CJ/J1/2024/0001</span>
+                                </small>
                             </div>
                         </div>
                     </div>

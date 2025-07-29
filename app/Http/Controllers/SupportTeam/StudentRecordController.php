@@ -65,23 +65,17 @@ class StudentRecordController extends Controller
 
         // Génération sécurisée de username / adm_no
         if (!empty($req->adm_no)) {
+            // Vérifier que le numéro d'admission n'existe pas déjà
+            if ($this->student->getRecord(['adm_no' => $req->adm_no])->exists()) {
+                return Qs::json('Ce numéro d\'admission existe déjà', false);
+            }
             $username = strtoupper(Qs::getAppCode() . '/' . $ct . '/' . $sr['year_admitted'] . '/' . $req->adm_no);
         } else {
-            // Génération automatique séquentielle
-            $lastStudent = $this->student->getRecord(['my_class_id' => $req->my_class_id])
-                ->where('session', Qs::getSetting('current_session'))
-                ->orderBy('id', 'desc')
-                ->first();
-            
-            if ($lastStudent) {
-                // Extraire le numéro de l'étudiant précédent
-                $lastNumber = intval(substr(strrchr($lastStudent->adm_no, '/'), 1));
-                $nextNumber = $lastNumber + 1;
-            } else {
-                $nextNumber = 1;
+            // Génération automatique avec la fonction helper
+            $username = Qs::generateAdmissionNumber($req->my_class_id, $sr['year_admitted']);
+            if (!$username) {
+                return Qs::json('Erreur lors de la génération du numéro d\'admission', false);
             }
-            
-            $username = strtoupper(Qs::getAppCode() . '/' . $ct . '/' . $sr['year_admitted'] . '/' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT));
         }
 
         $data['username'] = $username;

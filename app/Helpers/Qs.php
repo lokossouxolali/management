@@ -101,7 +101,7 @@ class Qs
 
     public static function getStudentData($remove = [])
     {
-        $data = ['my_class_id', 'section_id', 'my_parent_id', 'year_admitted', 'house', 'age'];
+        $data = ['my_class_id', 'section_id', 'my_parent_id', 'year_admitted', 'age'];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
 
@@ -356,6 +356,34 @@ class Qs
     public static function goWithSuccess($to, $msg)
     {
         return self::goToRoute($to)->with('flash_success', $msg);
+    }
+
+    public static function generateAdmissionNumber($class_id, $year_admitted)
+    {
+        $class = \App\Models\MyClass::with('class_type')->find($class_id);
+        if (!$class) {
+            return null;
+        }
+        
+        $classCode = strtoupper($class->class_type->code);
+        $appCode = self::getAppCode();
+        
+        // Trouver le dernier numéro pour cette classe et cette année
+        $lastStudent = \App\Models\StudentRecord::where('my_class_id', $class_id)
+            ->where('year_admitted', $year_admitted)
+            ->where('adm_no', 'LIKE', $appCode . '/' . $classCode . '/' . $year_admitted . '/%')
+            ->orderBy('id', 'desc')
+            ->first();
+        
+        if ($lastStudent && preg_match('/\/(\d+)$/', $lastStudent->adm_no, $matches)) {
+            $lastNumber = intval($matches[1]);
+            $nextNumber = $lastNumber + 1;
+        } else {
+            $nextNumber = 1;
+        }
+        
+        // Format: CODE/CLASSE/ANNEE/NUMERO (ex: CJ/J1/2024/0001)
+        return strtoupper($appCode . '/' . $classCode . '/' . $year_admitted . '/' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT));
     }
 
     public static function getDaysOfTheWeek()
