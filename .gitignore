@@ -15,3 +15,18 @@ _ide_helper.php
 storage
 .phpstorm.meta.php
 .editorconfig
+
+# Ignorer le contenu de storage mais garder les .gitkeep
+/storage/*
+!/storage/app
+!/storage/framework
+!/storage/framework/cache
+!/storage/framework/cache/data
+!/storage/framework/sessions
+!/storage/framework/testing
+!/storage/framework/views
+!/storage/logs
+
+# Ignorer le contenu de bootstrap/cache sauf le .gitkeep
+/bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
