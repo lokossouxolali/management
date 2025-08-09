@@ -27,7 +27,7 @@
                     <div class="media-body">
                         <div class="media-title font-weight-semibold">{{ Auth::user()->name }}</div>
                         <div class="font-size-xs opacity-50">
-                            <i class="icon-user font-size-sm"></i> &nbsp;{{ ucwords(str_replace('_', ' ', Auth::user()->user_type)) }}
+                            <i class="icon-user font-size-sm"></i> &nbsp;{{ Qs::getUserTypeName(Auth::user()->user_type) }}
                         </div>
                     </div>
 
@@ -47,19 +47,19 @@
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link {{ (Route::is('dashboard')) ? 'active' : '' }}">
                         <i class="icon-home4"></i>
-                        <span>Dashboard</span>
+                        <span>Tableau de Bord</span>
                     </a>
                 </li>
 
                 {{--Academics--}}
                 @if(Qs::userIsAcademic())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['tt.index', 'ttr.edit', 'ttr.show', 'ttr.manage']) ? 'nav-item-expanded nav-item-open' : '' }} ">
-                        <a href="#" class="nav-link"><i class="icon-graduation2"></i> <span> Academics</span></a>
+                        <a href="#" class="nav-link"><i class="icon-graduation2"></i> <span> Académique</span></a>
 
-                        <ul class="nav nav-group-sub" data-submenu-title="Manage Academics">
+                        <ul class="nav nav-group-sub" data-submenu-title="Gérer l'Académique">
 
                         {{--Timetables--}}
-                            <li class="nav-item"><a href="{{ route('tt.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['tt.index']) ? 'active' : '' }}">Timetables</a></li>
+                            <li class="nav-item"><a href="{{ route('tt.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['tt.index']) ? 'active' : '' }}">Emplois du temps</a></li>
                         </ul>
                     </li>
                     @endif
@@ -67,9 +67,9 @@
                 {{--Administrative--}}
                 @if(Qs::userIsAdministrative())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['payments.index', 'payments.create', 'payments.invoice', 'payments.receipts', 'payments.edit', 'payments.manage', 'payments.show',]) ? 'nav-item-expanded nav-item-open' : '' }} ">
-                        <a href="#" class="nav-link"><i class="icon-office"></i> <span> Administrative</span></a>
+                        <a href="#" class="nav-link"><i class="icon-office"></i> <span> Administratif</span></a>
 
-                        <ul class="nav nav-group-sub" data-submenu-title="Administrative">
+                        <ul class="nav nav-group-sub" data-submenu-title="Administratif">
 
                             {{--Payments--}}
                             @if(Qs::userIsTeamAccount())

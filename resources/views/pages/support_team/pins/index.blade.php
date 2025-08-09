@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('page_title', 'Exam Pins')
+@section('page_title', 'Codes PIN d\'Examen')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Exam Pins</h6>
+            <h6 class="card-title">Codes PIN d'Examen</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#valid-pins" class="nav-link active" data-toggle="tab">Valid Pins</a></li>
-                <li class="nav-item"><a href="#used-pins" class="nav-link" data-toggle="tab"> Used Pins</a></li>
+                <li class="nav-item"><a href="#valid-pins" class="nav-link active" data-toggle="tab">Codes Valides</a></li>
+                <li class="nav-item"><a href="#used-pins" class="nav-link" data-toggle="tab">Codes Utilisés</a></li>
             </ul>
 
             <div class="tab-content">
@@ -22,7 +22,7 @@
                             <div class="text-center alert alert-info border-0 alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                                <span>There are <strong>{{ $pin_count }}</strong> valid pins that have not been used</span>
+                                <span>Il y a <strong>{{ $pin_count }}</strong> codes valides qui n'ont pas été utilisés</span>
                             </div>
                         </div>
                     </div>
@@ -44,9 +44,9 @@
                             <div class="alert alert-info border-0 alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                                <div class="text-center">  <span>A total of <strong>{{ $used_pins->count() }}</strong> pin(s) have been used and may no longer be valid </span>
+                                                                 <div class="text-center">  <span>Un total de <strong>{{ $used_pins->count() }}</strong> code(s) ont été utilisés et ne sont plus valides </span>
 
-                                    <a id="used-pins" onclick="confirmDelete(this.id)" href="#" class="btn btn-danger btn-sm ml-2"><i class="icon-trash mr-1"></i> Delete ALL Used Pins</a>
+                                     <a id="used-pins" onclick="confirmDelete(this.id)" href="#" class="btn btn-danger btn-sm ml-2"><i class="icon-trash mr-1"></i> Supprimer TOUS les Codes Utilisés</a>
                                     <form method="post" id="item-delete-used-pins" action="{{ route('pins.destroy', 'used-pins') }}" class="hidden">@csrf @method('delete')</form>
 
                                 </div>
@@ -57,15 +57,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table datatable-button-html5-columns">
-                                <thead>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Pin</th>
-                                    <th>Used By</th>
-                                    <th>User Type</th>
-                                    <th>Used For Student</th>
-                                    <th>Date Used</th>
-                                </tr>
+                                                                 <thead>
+                                 <tr>
+                                     <th>N°</th>
+                                     <th>Code PIN</th>
+                                     <th>Utilisé Par</th>
+                                     <th>Type d'Utilisateur</th>
+                                     <th>Utilisé Pour l'Élève</th>
+                                     <th>Date d'Utilisation</th>
+                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($used_pins as $up)

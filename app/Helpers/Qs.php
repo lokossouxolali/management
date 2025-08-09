@@ -26,7 +26,7 @@ class Qs
 
     public static function getAppCode()
     {
-        return self::getSetting('system_title') ?: 'C  J';
+        return 'CSL'; // Code Système Laravels (ou adaptez selon vos besoins)
     }
 
     public static function getDefaultUserImage()
@@ -177,13 +177,13 @@ class Qs
 
     public static function getStaff($remove=[])
     {
-        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'librarian'];
+        $data =  ['super_admin', 'admin', 'teacher', 'accountant'];
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
 
     public static function getAllUserTypes($remove=[])
     {
-        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'librarian', 'student', 'parent'];
+        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'student', 'parent'];
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
 
@@ -389,6 +389,19 @@ class Qs
     public static function getDaysOfTheWeek()
     {
         return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    }
+
+    public static function getUserTypeName($user_type)
+    {
+        $types = [
+            'super_admin' => 'Super Administrateur',
+            'admin' => 'Administrateur', 
+            'teacher' => 'Professeur',
+            'accountant' => 'Comptable',
+            'student' => 'Élève',
+            'parent' => 'Parent'
+        ];
+        return $types[$user_type] ?? ucwords(str_replace('_', ' ', $user_type));
     }
 
 }

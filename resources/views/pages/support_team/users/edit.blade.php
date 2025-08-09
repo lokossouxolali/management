@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Email address: </label>
+                                <label>Adresse email: </label>
                                 <input value="{{ $user->email }}" type="email" name="email" class="form-control" placeholder="your@email.com">
                             </div>
                         </div>
@@ -66,8 +66,8 @@
                         @if(in_array($user->user_type, Qs::getStaff()))
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Date of Employment:</label>
-                                    <input autocomplete="off" name="emp_date" value="{{ $user->staff->first()->emp_date ?? '' }}" type="text" class="form-control date-pick" placeholder="Select Date...">
+                                    <label>Date d'embauche:</label>
+                                    <input autocomplete="off" name="emp_date" value="{{ $user->staff->first()->emp_date ?? '' }}" type="text" class="form-control date-pick" placeholder="Sélectionner une date...">
 
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="lga_id">LGA: <span class="text-danger">*</span></label>
+                            <label for="lga_id">Zone: <span class="text-danger">*</span></label>
                             <select required data-placeholder="Sélectionner d'abord l'état" class="select-search form-control" name="lga_id" id="lga_id">
                                 <option value="{{ $user->lga_id ?? '' }}">{{ $user->lga->name ?? '' }}</option>
                             </select>

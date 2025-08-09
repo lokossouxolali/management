@@ -96,12 +96,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         /*************** Pins *****************/
         Route::group(['prefix' => 'pins'], function(){
-            Route::get('create', 'PinController@create')->name('pins.create');
-            Route::get('/', 'PinController@index')->name('pins.index');
-            Route::post('/', 'PinController@store')->name('pins.store');
             Route::get('enter/{id}', 'PinController@enter_pin')->name('pins.enter');
             Route::post('verify/{id}', 'PinController@verify')->name('pins.verify');
-            Route::delete('/', 'PinController@destroy')->name('pins.destroy');
         });
 
         /*************** Marks *****************/
@@ -161,6 +157,14 @@ Route::group(['namespace' => 'SuperAdmin','middleware' => 'super_admin', 'prefix
 
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::put('/settings', 'SettingController@update')->name('settings.update');
+
+    /*************** Pins *****************/
+    Route::group(['prefix' => 'pins'], function(){
+        Route::get('create', 'PinController@create')->name('pins.create');
+        Route::get('/', 'PinController@index')->name('pins.index');
+        Route::post('/', 'PinController@store')->name('pins.store');
+        Route::delete('/', 'PinController@destroy')->name('pins.destroy');
+    });
 
 });
 

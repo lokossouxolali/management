@@ -56,7 +56,7 @@
                                     </tr>
                                 @endif
                                 {{-- <tr>
-                                    <td class="font-weight-bold">Birthday</td>
+                                    <td class="font-weight-bold">Date de Naissance</td>
                                     <td>{{$user->dob }}</td>
                                 </tr> --}}
                                 @if($user->bg_id)
@@ -79,7 +79,7 @@
                                 @endif
                                 @if($user->lga_id)
                                     <tr>
-                                        <td class="font-weight-bold">LGA</td>
+                                        <td class="font-weight-bold">Zone</td>
                                         <td>{{$user->lga->name }}</td>
                                     </tr>
                                 @endif

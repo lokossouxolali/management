@@ -104,12 +104,12 @@ class StudentRecordController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             DB::rollBack();
             if ($e->getCode() == 23000) {
-                return back()->with('flash_danger', 'Numéro d’admission ou email déjà utilisé.');
+                return Qs::json('Numéro d\'admission ou email déjà utilisé.', false);
             }
-            return back()->with('flash_danger', 'Erreur système. Veuillez contacter l’administrateur.');
+            return Qs::json('Erreur système. Veuillez contacter l\'administrateur.', false);
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('flash_danger', 'Erreur système. Veuillez contacter l’administrateur.');
+            return Qs::json('Erreur système. Veuillez contacter l\'administrateur.', false);
         }
     }
 

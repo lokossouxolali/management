@@ -16,14 +16,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nom Complet: <span class="text-danger">*</span></label>
-                                <input value="{{ old('name') }}" required type="text" name="name" placeholder="Nom Complet" class="form-control">
+                                <input value="{{ old('name') }}" required type="text" name="name" placeholder="Nom Complet (minimum 6 caractères)" class="form-control" minlength="6" maxlength="150">
                                 </div>
                             </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Adresse: <span class="text-danger">*</span></label>
-                                <input value="{{ old('address') }}" class="form-control" placeholder="Adresse" name="address" type="text" required>
+                                <input value="{{ old('address') }}" class="form-control" placeholder="Adresse (minimum 4 caractères)" name="address" type="text" required minlength="4" maxlength="120">
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Adresse email: </label>
-                                <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Adresse email">
+                                <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Adresse email (optionnel)" maxlength="100">
                             </div>
                         </div>
 
@@ -49,8 +49,8 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Fix:</label>
-                                <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="" >
+                                <label>Téléphone Fixe:</label>
+                                <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="Téléphone (minimum 6 chiffres)" minlength="6" maxlength="20">
                             </div>
                         </div>
 

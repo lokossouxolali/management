@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label for="teacher_id" class="col-lg-3 col-form-label font-weight-semibold">Teacher</label>
                             <div class="col-lg-9">
-                                <select data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
+                                <select data-placeholder="Sélectionner un professeur" class="form-control select-search" name="teacher_id" id="teacher_id">
                                     <option value=""></option>
                                     @foreach($teachers as $t)
                                         <option {{ $s->teacher_id == $t->id ? 'selected' : '' }} value="{{ Qs::hash($t->id) }}">{{ $t->name }}</option>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Submit form <i class="icon-paperplane ml-2"></i></button>
+                            <button type="submit" class="btn btn-primary">Enregistrer <i class="icon-paperplane ml-2"></i></button>
                         </div>
                     </form>
                 </div>

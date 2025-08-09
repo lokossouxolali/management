@@ -125,8 +125,8 @@
 
     function confirmDelete(id) {
         swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this item!",
+            title: "Êtes-vous sûr ?",
+            text: "Une fois supprimé, vous ne pourrez pas récupérer cet élément !",
             icon: "warning",
             buttons: true,
             dangerMode: true
@@ -139,8 +139,8 @@
 
     function confirmReset(id) {
         swal({
-            title: "Are you sure?",
-            text: "This will reset this item to default state",
+            title: "Êtes-vous sûr ?",
+            text: "Ceci va remettre cet élément à l'état par défaut",
             icon: "warning",
             buttons: true,
             dangerMode: true
@@ -153,8 +153,9 @@
 
     $('form#ajax-reg').on('submit', function(ev){
         ev.preventDefault();
-        submitForm($(this), 'store');
-        $('#ajax-reg-t-0').get(0).click();
+        hideAjaxAlert(); // Vider les erreurs précédentes
+        submitForm($(this), 'store'); // Soumettre le formulaire
+        $('#ajax-reg-t-0').get(0).click(); // Revenir à la première étape du wizard après soumission
     });
 
     $('form.ajax-pay').on('submit', function(ev){
@@ -259,11 +260,13 @@
     }
 
     function displayAjaxErr(errors){
+        hideAjaxAlert(); // Vider les erreurs précédentes
         $('#ajax-alert').show().html(' <div class="alert alert-danger border-0 alert-dismissible" id="ajax-msg"><button type="button" class="close" data-dismiss="alert"><span>&times;</span></button></div>');
         $.each(errors, function(k, v){
             $('#ajax-msg').append('<span><i class="icon-arrow-right5"></i> '+ v +'</span><br/>');
         });
         scrollTo('body');
+        resetFormAfterError(); // Permettre à l'utilisateur de corriger et réessayer
     }
 
     function scrollTo(el){
@@ -281,6 +284,36 @@
         form[0].reset();
     }
 
+    function resetFormAfterError(){
+        $('.steps-validation').find('.actions').find('.disabled').removeClass('disabled');
+        var form = $('#ajax-reg');
+        if(form.length > 0) {
+            var btn = form.find('button[type=submit]');
+            if(btn.length > 0) {
+                enableBtn(btn);
+            }
+        }
+        $('.wizard-form').removeClass('was-validated');
+    }
 
+    // Gestionnaire d'événement pour fermer l'alerte et réactiver le formulaire
+    $(document).on('click', '#ajax-alert .close', function() {
+        resetFormAfterError();
+    });
+
+    // Configuration personnalisée pour les inputs de fichier (Uniform.js)
+    $(document).ready(function() {
+        // Traduction des textes des inputs de fichier
+        if (typeof $.uniform !== 'undefined') {
+            $.uniform.defaults.fileDefaultText = 'Aucun fichier sélectionné';
+            $.uniform.defaults.fileBtnText = 'Choisir un fichier';
+        }
+        
+        // Forcer la mise à jour après configuration
+        $('input[type="file"].form-input-styled').uniform({
+            fileDefaultText: 'Aucun fichier sélectionné',
+            fileBtnText: 'Choisir un fichier'
+        });
+    });
 
 </script>

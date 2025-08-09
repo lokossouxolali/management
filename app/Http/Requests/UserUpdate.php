@@ -22,7 +22,7 @@ class UserUpdate extends FormRequest
         return [
             'phone' => 'sometimes|nullable|string|min:6|max:20',
             'phone2' => 'sometimes|nullable|string|min:6|max:20',
-            'email' => 'sometimes|nullable|email|max:100|unique:users,id',
+            'email' => 'sometimes|nullable|email|max:100',
             'username' => 'sometimes|nullable|alpha_dash|min:4|max:100|unique:users',
             'photo' => 'sometimes|nullable|image|mimes:jpeg,gif,png,jpg|max:2048',
             'address' => 'required|string|min:4|max:120'

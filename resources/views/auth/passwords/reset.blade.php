@@ -8,7 +8,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Reset Password</h3>
+                            <h3 class="card-title">Réinitialiser le Mot de Passe</h3>
                             <hr>
                             @if($errors->any())
                                 <div class="alert alert-danger border-0 alert-dismissible">
@@ -30,7 +30,7 @@
 
                                 <div class="form-group row">
                                     <label for="email"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('Adresse Email') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="email" type="email"
@@ -47,7 +47,7 @@
 
                                 <div class="form-group row">
                                     <label for="password"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('Mot de Passe') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password"
@@ -64,7 +64,7 @@
 
                                 <div class="form-group row">
                                     <label for="password-confirm"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le Mot de Passe') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control"
@@ -75,7 +75,7 @@
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('Reset Password') }}
+                                            {{ __('Réinitialiser le Mot de Passe') }}
                                         </button>
                                     </div>
                                 </div>

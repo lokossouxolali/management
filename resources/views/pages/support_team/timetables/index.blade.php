@@ -41,7 +41,7 @@
                            <div class="form-group row">
                                <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
                                <div class="col-lg-9">
-                                   <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                   <select required data-placeholder="Sélectionner une classe" class="form-control select" name="my_class_id" id="my_class_id">
                                        @foreach($my_classes as $mc)
                                            <option {{ old('my_class_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
                                        @endforeach
@@ -63,7 +63,7 @@
 
 
                            <div class="text-right">
-                               <button id="ajax-btn" type="submit" class="btn btn-primary">Submit form <i class="icon-paperplane ml-2"></i></button>
+                               <button id="ajax-btn" type="submit" class="btn btn-primary">Enregistrer <i class="icon-paperplane ml-2"></i></button>
                            </div>
                        </form>
                    </div>

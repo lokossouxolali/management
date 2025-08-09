@@ -48,8 +48,8 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Address: <span class="text-danger">*</span></label>
-                                        <input value="{{ old('address') }}" class="form-control" placeholder="Address" name="address" type="text" required>
+                                        <label>Adresse: <span class="text-danger">*</span></label>
+                                        <input value="{{ old('address') }}" class="form-control" placeholder="Adresse" name="address" type="text" required>
                                     </div>
                                 </div>
                             </div>
@@ -57,15 +57,15 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Email address: </label>
+                                        <label>Adresse email: </label>
                                         <input value="{{ old('email') }}" type="email" name="email" class="form-control" placeholder="your@email.com">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Username: </label>
-                                        <input value="{{ old('username') }}" type="text" name="username" class="form-control" placeholder="Username">
+                                        <label>Nom d'utilisateur: </label>
+                                        <input value="{{ old('username') }}" type="text" name="username" class="form-control" placeholder="Nom d'utilisateur">
                                     </div>
                                 </div>
 
@@ -88,34 +88,34 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Date of Employment:</label>
-                                        <input autocomplete="off" name="emp_date" value="{{ old('emp_date') }}" type="text" class="form-control date-pick" placeholder="Select Date...">
+                                        <label>Date d'embauche:</label>
+                                        <input autocomplete="off" name="emp_date" value="{{ old('emp_date') }}" type="text" class="form-control date-pick" placeholder="Sélectionner une date...">
 
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="password">Password: </label>
+                                        <label for="password">Mot de passe: </label>
                                         <input id="password" type="password" name="password" class="form-control"  >
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="gender">Gender: <span class="text-danger">*</span></label>
-                                        <select class="select form-control" id="gender" name="gender" required data-fouc data-placeholder="Choose..">
+                                        <label for="gender">Genre: <span class="text-danger">*</span></label>
+                                        <select class="select form-control" id="gender" name="gender" required data-fouc data-placeholder="Choisir..">
                                             <option value=""></option>
-                                            <option {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                                            <option {{ (old('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
+                                            <option {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Masculin</option>
+                                            <option {{ (old('gender') == 'Female') ? 'selected' : '' }} value="Female">Féminin</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="nal_id">Nationality: <span class="text-danger">*</span></label>
-                                        <select data-placeholder="Choose..." required name="nal_id" id="nal_id" class="select-search form-control">
+                                        <label for="nal_id">Nationalité: <span class="text-danger">*</span></label>
+                                        <select data-placeholder="Choisir..." required name="nal_id" id="nal_id" class="select-search form-control">
                                             <option value=""></option>
                                             @foreach($nationals as $nal)
                                                 <option {{ (old('nal_id') == $nal->id ? 'selected' : '') }} value="{{ $nal->id }}">{{ $nal->name }}</option>
@@ -128,8 +128,8 @@
                             <div class="row">
                                 {{--State--}}
                                 <div class="col-md-4">
-                                    <label for="state_id">State: <span class="text-danger">*</span></label>
-                                    <select onchange="getLGA(this.value)" required data-placeholder="Choose.." class="select-search form-control" name="state_id" id="state_id">
+                                    <label for="state_id">État: <span class="text-danger">*</span></label>
+                                    <select onchange="getLGA(this.value)" required data-placeholder="Choisir.." class="select-search form-control" name="state_id" id="state_id">
                                         <option value=""></option>
                                         @foreach($states as $st)
                                             <option {{ (old('state_id') == $st->id ? 'selected' : '') }} value="{{ $st->id }}">{{ $st->name }}</option>
@@ -138,16 +138,16 @@
                                 </div>
                                 {{--LGA--}}
                                 <div class="col-md-4">
-                                    <label for="lga_id">LGA: <span class="text-danger">*</span></label>
-                                    <select required data-placeholder="Select State First" class="select-search form-control" name="lga_id" id="lga_id">
+                                    <label for="lga_id">Zone: <span class="text-danger">*</span></label>
+                                    <select required data-placeholder="Sélectionner l'état d'abord" class="select-search form-control" name="lga_id" id="lga_id">
                                         <option value=""></option>
                                     </select>
                                 </div>
                                 {{--BLOOD GROUP--}}
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bg_id">Blood Group: </label>
-                                        <select class="select form-control" id="bg_id" name="bg_id" data-fouc data-placeholder="Choose..">
+                                        <label for="bg_id">Groupe Sanguin: </label>
+                                        <select class="select form-control" id="bg_id" name="bg_id" data-fouc data-placeholder="Choisir..">
                                             <option value=""></option>
                                             @foreach($blood_groups as $bg)
                                                 <option {{ (old('bg_id') == $bg->id ? 'selected' : '') }} value="{{ $bg->id }}">{{ $bg->name }}</option>
@@ -162,9 +162,9 @@
                                 {{--PASSPORT--}}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="d-block">Upload Passport Photo:</label>
+                                        <label class="d-block">Télécharger une photo de passeport:</label>
                                         <input value="{{ old('photo') }}" accept="image/*" type="file" name="photo" class="form-input-styled" data-fouc>
-                                        <span class="form-text text-muted">Accepted Images: jpeg, png. Max file size 2Mb</span>
+                                        <span class="form-text text-muted">Images acceptées: jpeg, png. Taille max 2Mo</span>
                                     </div>
                                 </div>
                             </div>
@@ -182,9 +182,9 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Photo</th>
-                                <th>Name</th>
-                                <th>Username</th>
-                                <th>Phone</th>
+                                <th>Nom</th>
+                                <th>Nom d'utilisateur</th>
+                                <th>Téléphone</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>
@@ -206,15 +206,15 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    {{--View Profile--}}
-                                                    <a href="{{ route('users.show', Qs::hash($u->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
-                                                    {{--Edit--}}
-                                                    <a href="{{ route('users.edit', Qs::hash($u->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                    {{--Voir Profil--}}
+                                                    <a href="{{ route('users.show', Qs::hash($u->id)) }}" class="dropdown-item"><i class="icon-eye"></i> Voir le Profil</a>
+                                                    {{--Modifier--}}
+                                                    <a href="{{ route('users.edit', Qs::hash($u->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Modifier</a>
                                                 @if(Qs::userIsSuperAdmin())
 
-                                                        <a href="{{ route('users.reset_pass', Qs::hash($u->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
-                                                        {{--Delete--}}
-                                                        <a id="{{ Qs::hash($u->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
+                                                        <a href="{{ route('users.reset_pass', Qs::hash($u->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Réinitialiser le mot de passe</a>
+                                                        {{--Supprimer--}}
+                                                        <a id="{{ Qs::hash($u->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Supprimer</a>
                                                         <form method="post" id="item-delete-{{ Qs::hash($u->id) }}" action="{{ route('users.destroy', Qs::hash($u->id)) }}" class="hidden">@csrf @method('delete')</form>
                                                 @endif
 

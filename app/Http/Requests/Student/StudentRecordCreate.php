@@ -26,7 +26,7 @@ class StudentRecordCreate extends FormRequest
             'gender' => 'required|string',
             'year_admitted' => 'required|string',
             'phone' => 'sometimes|nullable|string|min:6|max:20',
-            'email' => 'sometimes|nullable|email|max:100|unique:users',
+            'email' => 'sometimes|nullable|email|max:100',
             'password' => 'sometimes|nullable|string|min:6|max:50',
             'photo' => 'sometimes|nullable|image|mimes:jpeg,gif,png,jpg|max:2048',
             'address' => 'required|string|min:4|max:120',
