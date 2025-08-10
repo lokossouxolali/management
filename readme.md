@@ -1,123 +1,91 @@
-## **Laravel School Management System** 
+## **Système de Gestion Scolaire Laravel** 
 
-**LAVSMS** is developed for educational institutions like schools and colleges built on Laravel 8
+**LAVSMS** est développé pour les institutions éducatives comme les écoles et collèges, construit sur Laravel 8
 
-**SCREENSHOTS** 
+## **Types d'Utilisateurs**
 
-**Dashboard**
-<img src="https://i.ibb.co/D4T0z6T/dashboard.png" alt="dashboard" border="0">
+Il y a 6 types de comptes utilisateurs :
 
-**Login**
-<img src="https://i.ibb.co/Rh1Bfwk/login.png" alt="login" border="0">
+- **Administrateurs** (Super Admin & Admin)
+- **Comptable**
+- **Enseignant**
+- **Élève**
+- **Parent**
 
-**Student Marksheet**
-<img src="https://i.ibb.co/GCgv5ZR/marksheet.png" alt="marksheet" border="0">
+## **Prérequis** 
 
-**System Settings**
-<img src="https://i.ibb.co/Kmrhw69/system-settings.png" alt="system-settings" border="0">
+Vérifiez les prérequis Laravel 8 : https://laravel.com/docs/8.x
 
-**Print Marksheet**
-<div style="clear: both"> </div>
-<img src="https://i.ibb.co/5c1GHCj/capture-20210530-115521-crop.png" alt="print-marksheet">
+## **Installation**
+- Installer les dépendances (`composer install`)
+- Configurer les identifiants de base de données et les paramètres de l'application dans le fichier .env
+- Migrer la base de données (`php artisan migrate`)
+- Peupler la base de données (`php artisan db:seed`)
 
-**Print Tabulation Sheet & Marksheet**
-<img src="https://i.ibb.co/QmscPfn/capture-20210530-115802.png" alt="tabulation-sheet" border="0">
+## **Identifiants de Connexion**
+Après le seeding, les identifiants de connexion sont les suivants :
 
-<hr />  
-
-There are 7 types of user accounts. They include:
- 
-Administrators (Super Admin & Admin)
-- Librarian
-- Accountant
-- Teacher
-- Student
-- Parent
-
-**Requirements** 
-
-Check Laravel 8 Requirements https://laravel.com/docs/8.x
-
-**Installation**
-- Install dependencies (composer install)
-- Set Database Credentials & App Settings in dotenv file (.env)
-- Migrate Database (php artisan migrate)
-- Database seed (php artisan db:seed)
-
-**Login Credentials**
-After seeding. Login details as follows:
-
-| Account Type  | Username | Email | Password |
+| Type de Compte  | Nom d'utilisateur | Email | Mot de passe |
 | ------------- | -------- | ----- | -------- |
 | Super Admin | cj | cj@cj.com | cj |
-|  Admin | admin | admin@admin.com | cj |
-|  Teacher | teacher | teacher@teacher.com | cj |
-|  Parent | parent | parent@parent.com | cj |
-|  Accountant | accountant | accountant@accountant.com | cj |
-|  Student | student | student@student.com | cj |
+| Admin | admin | admin@admin.com | cj |
+| Enseignant | teacher | teacher@teacher.com | cj |
+| Parent | parent | parent@parent.com | cj |
+| Comptable | accountant | accountant@accountant.com | cj |
+| Élève | student | student@student.com | cj |
 
-#### **FUNCTIONS OF ACCOUNTS** 
+## **Fonctions des Comptes** 
 
-**-- SUPER ADMIN**
-- Only Super Admin can delete any record
-- Create any user account
+### **-- SUPER ADMIN**
+- Seul le Super Admin peut supprimer n'importe quel enregistrement
+- Créer n'importe quel compte utilisateur
  
-**-- Administrators (Super Admin & Admin)**
+### **-- Administrateurs (Super Admin & Admin)**
 
-- Manage students class/sections
-- View marksheet of students
-- Create, Edit and manage all user accounts & profiles
-- Create, Edit and manage Exams & Grades
-- Create, Edit and manage Subjects
-- Manage noticeboard of school
-- Notices are visible in calendar in dashboard
-- Edit system settings
-- Manage Payments & fees
+- Gérer les classes/sections d'élèves
+- Voir les bulletins des élèves
+- Créer, modifier et gérer tous les comptes utilisateurs et profils
+- Créer, modifier et gérer les Examens et Notes
+- Créer, modifier et gérer les Matières
+- Gérer le tableau d'affichage de l'école
+- Les avis sont visibles dans le calendrier du tableau de bord
+- Modifier les paramètres système
+- Gérer les Paiements et frais
 
-**-- ACCOUNTANT**
-- Manage Payments & fees
-- Print Payment Receipts
+### **-- COMPTABLE**
+- Gérer les Paiements et frais
+- Imprimer les Reçus de Paiement
 
-**-- LIBRARIAN**
-- Manage Books in the Library
+### **-- ENSEIGNANT**
+- Gérer sa propre Classe/Section
+- Gérer les Dossiers d'Examen pour ses propres Matières
+- Gérer l'Emploi du Temps s'il est assigné comme Professeur Principal
+- Gérer son propre profil
+- Télécharger des Matériels d'Étude
 
-**-- TEACHER**
-- Manage Own Class/Section
-- Manage Exam Records for own Subjects
-- Manage Timetable if Assigned as Class Teacher
-- Manage own profile
-- Upload Study Materials
+### **-- ÉLÈVE**
+- Voir le profil de l'enseignant
+- Voir ses propres matières de classe
+- Voir ses propres notes et emploi du temps de classe
+- Voir les Paiements
+- Voir le tableau d'affichage et les événements scolaires dans le calendrier
+- Gérer son propre profil
 
-**-- STUDENT**
-- View teacher profile
-- View own class subjects
-- View own marks and class timetable
-- View Payments
-- View library and book status
-- View noticeboard and school events in calendar
-- Manage own profile
+### **-- PARENT**
+- Voir le profil de l'enseignant
+- Voir le bulletin de son enfant (Télécharger/Imprimer PDF)
+- Voir l'Emploi du Temps de son enfant
+- Voir les paiements de son enfant
+- Voir le tableau d'affichage et les événements scolaires dans le calendrier
+- Gérer son propre profil
 
-**-- PARENT**
-- View teacher profile
-- View own child's marksheet (Download/Print PDF)
-- View own child's Timetable
-- View own child's payments
-- View noticeboard and school events in calendar
-- Manage own profile
+## **Contribuer**
 
-### **Contributing**
+Vos contributions et suggestions sont les bienvenues. Veuillez utiliser Pull Request
 
-Your Contributions & suggestions are welcomed. Please use Pull Request
+## **Vulnérabilités de Sécurité**
 
-### **Security Vulnerabilities**
+Si vous découvrez une vulnérabilité de sécurité dans LAV_SMS, veuillez envoyer un e-mail  via epiphanassou068@gmail.com. Toutes les vulnérabilités de sécurité seront traitées rapidement.
 
-If you discover a security vulnerability within LAV_SMS, please send an e-mail to CJ Inspired via cjay.pub@gmail.com. All security vulnerabilities will be promptly addressed.
-
-***Please Note*** that some sections of this project are in the work-in-progress stage and would be updated soon. These include:
-
-- The Noticeboard/Calendar in the Dashboard Area
-- Librarian/Acountant user pages
-- Library Resources/Study Materials Upload for Students
-
-### **Contact [CJ INSPIRED]**
-- Phone : +2347068149559
+## **Contact**
+- Téléphone : +22898337866 /96986875
