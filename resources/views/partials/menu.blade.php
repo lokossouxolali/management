@@ -151,6 +151,11 @@
                         <a href="{{ route('sections.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['sections.index','sections.edit',]) ? 'active' : '' }}"><i class="icon-fence"></i> <span>Sections</span></a>
                     </li>
 
+                    {{--Gestion des Séries--}}
+                    <li class="nav-item">
+                        <a href="{{ route('series.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['series.index','series.create','series.edit',]) ? 'active' : '' }}"><i class="icon-library2"></i> <span>Séries</span></a>
+                    </li>
+
                     {{--Gestion des Matières--}}
                     <li class="nav-item">
                         <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Matières</span></a>

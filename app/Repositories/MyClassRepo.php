@@ -6,13 +6,14 @@ use App\Models\ClassType;
 use App\Models\MyClass;
 use App\Models\Section;
 use App\Models\Subject;
+use App\Models\Series;
 
 class MyClassRepo
 {
 
     public function all()
     {
-        return MyClass::orderBy('name', 'asc')->with('class_type')->get();
+        return MyClass::orderBy('name', 'asc')->with(['class_type', 'series'])->get();
     }
 
     public function getMC($data)
@@ -55,6 +56,55 @@ class MyClassRepo
         return ClassType::find($this->find($class_id)->class_type_id);
     }
 
+    /************* Series *******************/
+
+    public function getAllSeries()
+    {
+        return Series::orderBy('type')->orderBy('name')->get();
+    }
+
+    public function getGeneralSeries()
+    {
+        return Series::getGeneralSeries();
+    }
+
+    public function getTechnicalSeries()
+    {
+        return Series::getTechnicalSeries();
+    }
+
+    public function findSeries($id)
+    {
+        return Series::find($id);
+    }
+
+    public function createSeries($data)
+    {
+        return Series::create($data);
+    }
+
+    public function updateSeries($id, $data)
+    {
+        return Series::find($id)->update($data);
+    }
+
+    public function deleteSeries($id)
+    {
+        return Series::destroy($id);
+    }
+
+    public function getClassesBySeries($series_id)
+    {
+        return MyClass::where('series_id', $series_id)->with(['class_type', 'series'])->get();
+    }
+
+    public function getLycéeClasses()
+    {
+        return MyClass::whereHas('class_type', function($query) {
+            $query->where('code', 'S');
+        })->with(['class_type', 'series'])->orderBy('name')->get();
+    }
+
     /************* Section *******************/
 
     public function createSection($data)
@@ -89,14 +139,24 @@ class MyClassRepo
 
     public function getClassSections($class_id)
     {
-        return Section::where(['my_class_id' => $class_id])->orderBy('name', 'asc')->get();
+        return Section::where('my_class_id', $class_id)->orderBy('name', 'asc')->get();
+    }
+
+    public function findSubjectByClass($class_id)
+    {
+        return Subject::where('my_class_id', $class_id)->orderBy('name', 'asc')->get();
+    }
+
+    public function findSubjectByTeacher($teacher_id)
+    {
+        return Subject::where('teacher_id', $teacher_id)->orderBy('name', 'asc')->get();
     }
 
     /************* Subject *******************/
 
-    public function createSubject($data)
+    public function getAllSubjects()
     {
-        return Subject::create($data);
+        return Subject::orderBy('name', 'asc')->with(['my_class', 'teacher'])->get();
     }
 
     public function findSubject($id)
@@ -104,24 +164,9 @@ class MyClassRepo
         return Subject::find($id);
     }
 
-    public function findSubjectByClass($class_id, $order_by = 'name')
+    public function createSubject($data)
     {
-        return $this->getSubject(['my_class_id'=> $class_id])->orderBy($order_by)->get();
-    }
-
-    public function findSubjectByTeacher($teacher_id, $order_by = 'name')
-    {
-        return $this->getSubject(['teacher_id'=> $teacher_id])->orderBy($order_by)->get();
-    }
-
-    public function getSubject($data)
-    {
-        return Subject::where($data);
-    }
-
-    public function getSubjectsByIDs($ids)
-    {
-        return Subject::whereIn('id', $ids)->orderBy('name')->get();
+        return Subject::create($data);
     }
 
     public function updateSubject($id, $data)
@@ -134,9 +179,8 @@ class MyClassRepo
         return Subject::destroy($id);
     }
 
-    public function getAllSubjects()
+    public function getSubjectsByIDs($ids)
     {
-        return Subject::orderBy('name', 'asc')->with(['my_class', 'teacher'])->get();
+        return Subject::whereIn('id', $ids)->get();
     }
-
 }

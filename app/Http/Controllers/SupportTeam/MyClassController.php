@@ -26,6 +26,7 @@ class MyClassController extends Controller
     {
         $d['my_classes'] = $this->my_class->all();
         $d['class_types'] = $this->my_class->getTypes();
+        $d['series'] = $this->my_class->getAllSeries();
 
         return view('pages.support_team.classes.index', $d);
     }
@@ -50,13 +51,15 @@ class MyClassController extends Controller
     public function edit($id)
     {
         $d['c'] = $c = $this->my_class->find($id);
+        $d['class_types'] = $this->my_class->getTypes();
+        $d['series'] = $this->my_class->getAllSeries();
 
         return is_null($c) ? Qs::goWithDanger('classes.index') : view('pages.support_team.classes.edit', $d) ;
     }
 
     public function update(ClassUpdate $req, $id)
     {
-        $data = $req->only(['name']);
+        $data = $req->only(['name', 'class_type_id', 'series_id']);
         $this->my_class->update($id, $data);
 
         return Qs::jsonUpdateOk();

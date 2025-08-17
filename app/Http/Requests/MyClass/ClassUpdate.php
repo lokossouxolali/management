@@ -21,6 +21,16 @@ class ClassUpdate extends FormRequest
     {
         return [
             'name' => 'required|string|min:3',
+            'class_type_id' => 'required|exists:class_types,id',
+            'series_id' => 'nullable|exists:series,id',
+        ];
+    }
+
+    public function attributes()
+    {
+        return  [
+            'class_type_id' => 'Type de classe',
+            'series_id' => 'Série',
         ];
     }
 }

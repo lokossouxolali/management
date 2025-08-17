@@ -7,7 +7,7 @@
         <td><strong>CLASS:</strong> {{ $sr->my_class->name }}</td>
     </tr>
     <tr>
-        <td><strong>REPORT SHEET FOR</strong> {!! strtoupper(Mk::getSuffix($ex->term)) !!} TERM </td>
+        <td><strong>REPORT SHEET FOR</strong> {{ strtoupper($ex->getPeriodLabel()) }} </td>
         <td><strong>ACADEMIC YEAR:</strong> {{ $ex->year }}</td>
         <td><strong>AGE:</strong> {{ $sr->age ?: ($sr->user->dob ? date_diff(date_create($sr->user->dob), date_create('now'))->y : '-') }}</td>
     </tr>

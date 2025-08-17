@@ -138,6 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('subjects', 'SubjectController');
         Route::resource('grades', 'GradeController');
         Route::resource('exams', 'ExamController');
+        Route::resource('series', 'SeriesController');
 
         Route::resource('payments', 'PaymentController');
 
@@ -148,6 +149,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('get_lga/{state_id}', 'AjaxController@get_lga')->name('get_lga');
         Route::get('get_class_sections/{class_id}', 'AjaxController@get_class_sections')->name('get_class_sections');
         Route::get('get_class_subjects/{class_id}', 'AjaxController@get_class_subjects')->name('get_class_subjects');
+        Route::get('get_series_by_type', 'SupportTeam\SeriesController@getSeriesByType')->name('get_series_by_type');
+        Route::get('get_classes_by_series', 'SupportTeam\SeriesController@getClassesBySeries')->name('get_classes_by_series');
     });
 
 });
