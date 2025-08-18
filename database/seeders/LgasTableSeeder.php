@@ -10,6 +10,12 @@ class LgasTableSeeder extends Seeder
 {
     public function run()
     {
+        // Vérifier que les états existent avant de créer les LGA
+        $states = \App\Models\State::all();
+        if ($states->isEmpty()) {
+            throw new \Exception('Aucun état trouvé. Assurez-vous que StatesTableSeeder a été exécuté.');
+        }
+
         DB::table('lgas')->delete();
 
         $quartiers = [

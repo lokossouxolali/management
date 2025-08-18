@@ -39,8 +39,8 @@
         {{--Key to Grading--}}
         {{--@include('pages.support_team.marks.print.grading')--}}
 
-        {{-- TRAITS - PSCHOMOTOR & AFFECTIVE --}}
-        @include('pages.support_team.marks.print.skills')
+        {{-- TRAITS - PSCHOMOTOR & AFFECTIVE - SUPPRIMÉ --}}
+        {{-- @include('pages.support_team.marks.print.skills') --}}
 
         <div style="margin-top: 25px; clear: both;"></div>
 

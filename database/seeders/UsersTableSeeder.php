@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
 
         $this->createNewUsers();
-        $this->createManyUsers( 3);
+        $this->createManyUsers(1); // Réduit de 3 à 1
     }
 
     protected function createNewUsers()

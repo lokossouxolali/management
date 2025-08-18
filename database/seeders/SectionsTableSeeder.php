@@ -19,7 +19,7 @@ class SectionsTableSeeder extends Seeder
 
         foreach ($classes as $classe) {
             $sections[] = [
-                'name' => 'Section A',
+                'name' => 'A',
                 'my_class_id' => $classe->id,
                 'active' => 1,
             ];

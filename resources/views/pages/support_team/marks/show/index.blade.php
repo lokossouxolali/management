@@ -34,8 +34,8 @@
             {{--    EXAM COMMENTS   --}}
             @include('pages.support_team.marks.show.comments')
 
-            {{-- SKILL RATING --}}
-            @include('pages.support_team.marks.show.skills')
+            {{-- SKILL RATING - SUPPRIMÉ --}}
+            {{-- @include('pages.support_team.marks.show.skills') --}}
 
         @endforeach
     @endforeach

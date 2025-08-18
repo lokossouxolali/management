@@ -18,7 +18,7 @@ class StudentRecordsTableSeeder extends Seeder
     public function run()
     {
         $this->createStudentRecord();
-        $this->createManyStudentRecords(3);
+        $this->createManyStudentRecords(1); // Réduit de 3 à 1
     }
 
     protected function createManyStudentRecords(int $count)
@@ -48,6 +48,10 @@ class StudentRecordsTableSeeder extends Seeder
     protected function createStudentRecord()
     {
         $section = Section::first();
+        
+        if (!$section) {
+            throw new \Exception('Aucune section trouvée. Assurez-vous que SectionsTableSeeder a été exécuté.');
+        }
 
         $user = User::factory()->create([
             'name' => 'Student CJ',

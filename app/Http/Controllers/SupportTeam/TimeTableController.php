@@ -40,7 +40,7 @@ class TimeTableController extends Controller
         $d['ttr'] = $ttr = $this->tt->findRecord($ttr_id);
         $d['time_slots'] = $this->tt->getTimeSlotByTTR($ttr_id);
         $d['ts_existing'] = $this->tt->getExistingTS($ttr_id);
-        $d['subjects'] = $this->my_class->getSubject(['my_class_id' => $ttr->my_class_id])->get();
+        $d['subjects'] = $this->my_class->findSubjectByClass($ttr->my_class_id);
         $d['my_class'] = $this->my_class->find($ttr->my_class_id);
 
         if($ttr->exam_id){

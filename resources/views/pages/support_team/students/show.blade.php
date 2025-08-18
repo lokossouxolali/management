@@ -35,7 +35,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Classe</td>
-                                <td>{{ $sr->my_class->name.' '.$sr->section->name }}</td>
+                                <td>{{ $sr->my_class->name.' --- '.$sr->section->name }}</td>
                             </tr>
                             @if($sr->my_parent_id)
                                 <tr>
