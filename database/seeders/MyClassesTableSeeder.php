@@ -2,10 +2,8 @@
 namespace Database\Seeders;
 
 use App\Models\ClassType;
-use App\Models\Series;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
 
 class MyClassesTableSeeder extends Seeder
 {
@@ -17,65 +15,34 @@ class MyClassesTableSeeder extends Seeder
     public function run()
     {
         DB::table('my_classes')->delete();
-        $ct = ClassType::pluck('id')->all();
-        $series = Series::pluck('id')->all();
+        
+        // Récupérer les IDs des catégories
+        $categories = ClassType::pluck('id', 'code')->all();
 
         $data = [
-            // Crèche
-            ['name' => 'Crèche 1', 'class_type_id' => $ct[0], 'series_id' => null],
-            ['name' => 'Crèche 2', 'class_type_id' => $ct[0], 'series_id' => null],
-            ['name' => 'Crèche 3', 'class_type_id' => $ct[0], 'series_id' => null],
-            
-            // Maternelle
-            ['name' => 'Petite section', 'class_type_id' => $ct[1], 'series_id' => null],
-            ['name' => 'Moyenne section', 'class_type_id' => $ct[2], 'series_id' => null],
-            ['name' => 'Grande section', 'class_type_id' => $ct[3], 'series_id' => null],
+            // Jardin d'enfant
+            ['name' => '1ère Crèche', 'class_type_id' => $categories['JARDIN'], 'description' => 'Première année de crèche', 'order' => 1, 'active' => true, 'requires_series' => false],
+            ['name' => '2ème Crèche', 'class_type_id' => $categories['JARDIN'], 'description' => 'Deuxième année de crèche', 'order' => 2, 'active' => true, 'requires_series' => false],
             
             // Primaire
-            ['name' => 'CP', 'class_type_id' => $ct[4], 'series_id' => null],
-            ['name' => 'CE1', 'class_type_id' => $ct[4], 'series_id' => null],
-            ['name' => 'CE2', 'class_type_id' => $ct[4], 'series_id' => null],
-            ['name' => 'CM1', 'class_type_id' => $ct[4], 'series_id' => null],
-            ['name' => 'CM2', 'class_type_id' => $ct[4], 'series_id' => null],
+            ['name' => 'CI', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours d\'Initiation', 'order' => 1, 'active' => true, 'requires_series' => false],
+            ['name' => 'CP1', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours Préparatoire 1ère année', 'order' => 2, 'active' => true, 'requires_series' => false],
+            ['name' => 'CP2', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours Préparatoire 2ème année', 'order' => 3, 'active' => true, 'requires_series' => false],
+            ['name' => 'CE1', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours Élémentaire 1ère année', 'order' => 4, 'active' => true, 'requires_series' => false],
+            ['name' => 'CE2', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours Élémentaire 2ème année', 'order' => 5, 'active' => true, 'requires_series' => false],
+            ['name' => 'CM1', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours Moyen 1ère année', 'order' => 6, 'active' => true, 'requires_series' => false],
+            ['name' => 'CM2', 'class_type_id' => $categories['PRIMAIRE'], 'description' => 'Cours Moyen 2ème année', 'order' => 7, 'active' => true, 'requires_series' => false],
             
             // Collège
-            ['name' => '6ème', 'class_type_id' => $ct[5], 'series_id' => null],
-            ['name' => '5ème', 'class_type_id' => $ct[5], 'series_id' => null],
-            ['name' => '4ème', 'class_type_id' => $ct[5], 'series_id' => null],
-            ['name' => '3ème', 'class_type_id' => $ct[5], 'series_id' => null],
+            ['name' => '6ème', 'class_type_id' => $categories['COLLEGE'], 'description' => 'Sixième', 'order' => 1, 'active' => true, 'requires_series' => false],
+            ['name' => '5ème', 'class_type_id' => $categories['COLLEGE'], 'description' => 'Cinquième', 'order' => 2, 'active' => true, 'requires_series' => false],
+            ['name' => '4ème', 'class_type_id' => $categories['COLLEGE'], 'description' => 'Quatrième', 'order' => 3, 'active' => true, 'requires_series' => false],
+            ['name' => '3ème', 'class_type_id' => $categories['COLLEGE'], 'description' => 'Troisième', 'order' => 4, 'active' => true, 'requires_series' => false],
             
-            // Lycée - 2nde (sans série spécifique)
-            ['name' => '2nde', 'class_type_id' => $ct[6], 'series_id' => null],
-            
-            // Lycée - 1ère avec séries générales
-            ['name' => '1ère S', 'class_type_id' => $ct[6], 'series_id' => $series[0]], // Série S
-            ['name' => '1ère ES', 'class_type_id' => $ct[6], 'series_id' => $series[1]], // Série ES
-            ['name' => '1ère L', 'class_type_id' => $ct[6], 'series_id' => $series[2]], // Série L
-            
-            // Lycée - 1ère avec séries techniques
-            ['name' => '1ère STI2D', 'class_type_id' => $ct[6], 'series_id' => $series[3]], // STI2D
-            ['name' => '1ère STL', 'class_type_id' => $ct[6], 'series_id' => $series[4]], // STL
-            ['name' => '1ère STMG', 'class_type_id' => $ct[6], 'series_id' => $series[5]], // STMG
-            ['name' => '1ère ST2S', 'class_type_id' => $ct[6], 'series_id' => $series[6]], // ST2S
-            ['name' => '1ère STD2A', 'class_type_id' => $ct[6], 'series_id' => $series[7]], // STD2A
-            ['name' => '1ère STAV', 'class_type_id' => $ct[6], 'series_id' => $series[8]], // STAV
-            ['name' => '1ère HR', 'class_type_id' => $ct[6], 'series_id' => $series[9]], // Hôtellerie-Restauration
-            ['name' => '1ère TMD', 'class_type_id' => $ct[6], 'series_id' => $series[10]], // TMD
-            
-            // Lycée - Terminale avec séries générales
-            ['name' => 'Terminale S', 'class_type_id' => $ct[6], 'series_id' => $series[0]], // Série S
-            ['name' => 'Terminale ES', 'class_type_id' => $ct[6], 'series_id' => $series[1]], // Série ES
-            ['name' => 'Terminale L', 'class_type_id' => $ct[6], 'series_id' => $series[2]], // Série L
-            
-            // Lycée - Terminale avec séries techniques
-            ['name' => 'Terminale STI2D', 'class_type_id' => $ct[6], 'series_id' => $series[3]], // STI2D
-            ['name' => 'Terminale STL', 'class_type_id' => $ct[6], 'series_id' => $series[4]], // STL
-            ['name' => 'Terminale STMG', 'class_type_id' => $ct[6], 'series_id' => $series[5]], // STMG
-            ['name' => 'Terminale ST2S', 'class_type_id' => $ct[6], 'series_id' => $series[6]], // ST2S
-            ['name' => 'Terminale STD2A', 'class_type_id' => $ct[6], 'series_id' => $series[7]], // STD2A
-            ['name' => 'Terminale STAV', 'class_type_id' => $ct[6], 'series_id' => $series[8]], // STAV
-            ['name' => 'Terminale HR', 'class_type_id' => $ct[6], 'series_id' => $series[9]], // Hôtellerie-Restauration
-            ['name' => 'Terminale TMD', 'class_type_id' => $ct[6], 'series_id' => $series[10]], // TMD
+            // Lycée
+            ['name' => 'Seconde', 'class_type_id' => $categories['LYCEE'], 'description' => 'Seconde générale', 'order' => 1, 'active' => true, 'requires_series' => false],
+            ['name' => 'Première', 'class_type_id' => $categories['LYCEE'], 'description' => 'Première avec séries', 'order' => 2, 'active' => true, 'requires_series' => true],
+            ['name' => 'Terminale', 'class_type_id' => $categories['LYCEE'], 'description' => 'Terminale avec séries', 'order' => 3, 'active' => true, 'requires_series' => true],
         ];
 
         DB::table('my_classes')->insert($data);

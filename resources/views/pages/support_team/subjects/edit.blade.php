@@ -50,10 +50,72 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                                    <label for="coefficient" class="col-lg-3 col-form-label font-weight-semibold">Coefficient</label>
+                                    <div class="col-lg-9">
+                                        <input id="coefficient" name="coefficient" value="{{ old('coefficient', $s->coefficient) }}" type="number" min="1" max="6" step="1" class="form-control" placeholder="1" onchange="updateMaxScore()">
+                                        <small class="form-text text-muted">Valeur entre 1 et 6. Défaut: 1</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="max_score" class="col-lg-3 col-form-label font-weight-semibold">Score Maximum</label>
+                                    <div class="col-lg-9">
+                                        <input id="max_score" name="max_score" value="{{ old('max_score', $subject->max_score) }}" type="number" min="10" max="100" step="1" class="form-control" placeholder="20" readonly>
+                                        <small class="form-text text-muted">Calculé automatiquement : Coefficient × 20</small>
+                                    </div>
+                                </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label font-weight-semibold">Matière Principale</label>
+                            <div class="col-lg-9">
+                                <div class="form-check">
+                                    <input type="checkbox" name="is_core_subject" value="1" {{ $s->is_core_subject ? 'checked' : '' }} class="form-check-input" id="is_core_subject">
+                                    <label class="form-check-label" for="is_core_subject">
+                                        Marquer comme matière principale
+                                    </label>
+                                </div>
+                                <small class="form-text text-muted">Les matières principales ont généralement un coefficient plus élevé</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label font-weight-semibold">Description</label>
+                            <div class="col-lg-9">
+                                <textarea name="description" rows="3" class="form-control" placeholder="Description optionnelle de la matière">{{ $s->description }}</textarea>
+                            </div>
+                        </div>
+
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary">Submit form <i class="icon-paperplane ml-2"></i></button>
                         </div>
                     </form>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card bg-light">
+                        <div class="card-header">
+                            <h6 class="card-title">Aide - Coefficients</h6>
+                        </div>
+                        <div class="card-body">
+                            <h6>Guide des coefficients :</h6>
+                            <ul class="list-unstyled">
+                                <li><span class="badge badge-danger">6</span> Matières très importantes (Maths, Français)</li>
+                                <li><span class="badge badge-warning">4-5</span> Matières importantes (Sciences, Histoire)</li>
+                                <li><span class="badge badge-info">3</span> Matières moyennes (Géo, Arts)</li>
+                                <li><span class="badge badge-secondary">2</span> Matières secondaires (Sport, Musique)</li>
+                                <li><span class="badge badge-light">1</span> Matières optionnelles</li>
+                            </ul>
+                            
+                            <hr>
+                            
+                            <h6>Impact sur les calculs :</h6>
+                            <p class="small">
+                                <strong>Score pondéré = Note brute × Coefficient</strong><br>
+                                <strong>Moyenne pondérée = Σ(Scores pondérés) ÷ Σ(Coefficients)</strong>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,4 +123,19 @@
 
     {{--subject Edit Ends--}}
 
+@endsection
+
+@section('scripts')
+<script>
+    function updateMaxScore() {
+        const coefficient = parseInt(document.getElementById('coefficient').value) || 1;
+        const maxScore = coefficient * 20;
+        document.getElementById('max_score').value = maxScore;
+    }
+
+    // Initialiser le score maximum au chargement de la page
+    document.addEventListener('DOMContentLoaded', function() {
+        updateMaxScore();
+    });
+</script>
 @endsection

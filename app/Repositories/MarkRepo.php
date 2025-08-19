@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Models\Grade;
 use App\Models\Mark;
 use App\Models\StudentRecord;
+use App\Models\Subject;
+use App\Models\Exam;
 
 class MarkRepo
 {
@@ -56,6 +58,30 @@ class MarkRepo
         return $t1 + $t2 + $t3;*/
     }
 
+    /**
+     * NOUVELLE MÉTHODE : Calculer le total pondéré d'un élève
+     */
+    public function getExamWeightedTotalTerm($exam, $st_id, $class_id, $year)
+    {
+        $marks = Mark::where([
+            'student_id' => $st_id, 
+            'exam_id' => $exam->id, 
+            'my_class_id' => $class_id, 
+            'year' => $year
+        ])->with('subject')->get();
+
+        $total = 0;
+        $tex = 'tex'.$exam->term;
+
+        foreach ($marks as $mark) {
+            if ($mark->subject && $mark->$tex > 0) {
+                $total += $mark->subject->getWeightedScore($mark->$tex);
+            }
+        }
+
+        return round($total, 2);
+    }
+
     public function getExamAvgTerm($exam, $st_id, $class_id, $sec_id, $year)
     {
         $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'section_id' => $sec_id, 'year' => $year];
@@ -79,6 +105,33 @@ class MarkRepo
 
         $avg = $t1 + $t2 + $t3;
         return ($avg > 0) ? round($avg/$count, 1) : 0;*/
+    }
+
+    /**
+     * NOUVELLE MÉTHODE : Calculer la moyenne pondérée d'un élève
+     */
+    public function getExamWeightedAvgTerm($exam, $st_id, $class_id, $sec_id, $year)
+    {
+        $marks = Mark::where([
+            'student_id' => $st_id, 
+            'exam_id' => $exam->id, 
+            'my_class_id' => $class_id, 
+            'section_id' => $sec_id, 
+            'year' => $year
+        ])->with('subject')->get();
+
+        $tex = 'tex'.$exam->term;
+        $totalWeighted = 0;
+        $totalCoefficients = 0;
+
+        foreach ($marks as $mark) {
+            if ($mark->subject && $mark->$tex > 0) {
+                $totalWeighted += $mark->subject->getWeightedScore($mark->$tex);
+                $totalCoefficients += $mark->subject->coefficient;
+            }
+        }
+
+        return $totalCoefficients > 0 ? round($totalWeighted / $totalCoefficients, 2) : 0;
     }
 
     public function getSubCumTotal($tex3, $st_id, $sub_id, $class_id, $year)
@@ -109,6 +162,29 @@ class MarkRepo
         return Mark::where($d)->select($tex)->get()->first()->$tex;
     }
 
+    /**
+     * NOUVELLE MÉTHODE : Obtenir le score pondéré d'une matière
+     */
+    public function getSubjectWeightedMark($exam, $class_id, $sub_id, $st_id, $year)
+    {
+        $mark = Mark::where([
+            'exam_id' => $exam->id, 
+            'my_class_id' => $class_id, 
+            'subject_id' => $sub_id, 
+            'student_id' => $st_id, 
+            'year' => $year
+        ])->with('subject')->first();
+
+        if (!$mark || !$mark->subject) {
+            return 0;
+        }
+
+        $tex = 'tex'.$exam->term;
+        $rawScore = $mark->$tex;
+
+        return $mark->subject->getWeightedScore($rawScore);
+    }
+
     public function getSubPos($st_id, $exam, $class_id, $sub_id, $year)
     {
         $d = ['exam_id' => $exam->id, 'my_class_id' => $class_id, 'subject_id' => $sub_id, 'year' => $year];
@@ -118,6 +194,45 @@ class MarkRepo
 
         $sub_mks = Mark::where($d)->whereNotNull($tex)->orderBy($tex, 'DESC')->select($tex)->get()->pluck($tex);
         return $sub_pos = $sub_mks->count() > 0 ? $sub_mks->search($sub_mk) + 1 : NULL;
+    }
+
+    /**
+     * NOUVELLE MÉTHODE : Calculer la position pondérée d'un élève
+     */
+    public function getWeightedPos($st_id, $exam, $class_id, $sec_id, $year)
+    {
+        $students = Mark::where([
+            'exam_id' => $exam->id, 
+            'my_class_id' => $class_id, 
+            'section_id' => $sec_id, 
+            'year' => $year
+        ])->select('student_id')->distinct()->get();
+
+        $studentAverages = [];
+
+        foreach ($students as $student) {
+            $avg = $this->getExamWeightedAvgTerm($exam, $student->student_id, $class_id, $sec_id, $year);
+            if ($avg > 0) {
+                $studentAverages[] = [
+                    'student_id' => $student->student_id,
+                    'average' => $avg
+                ];
+            }
+        }
+
+        // Trier par moyenne décroissante
+        usort($studentAverages, function($a, $b) {
+            return $b['average'] <=> $a['average'];
+        });
+
+        // Trouver la position
+        foreach ($studentAverages as $index => $student) {
+            if ($student['student_id'] == $st_id) {
+                return $index + 1;
+            }
+        }
+
+        return null;
     }
 
     public function countExSubjects($exam, $st_id, $class_id, $year)
@@ -137,6 +252,35 @@ class MarkRepo
 
         $avg = Mark::where($d)->select($tex)->avg($tex);
         return round($avg, 1);
+    }
+
+    /**
+     * NOUVELLE MÉTHODE : Calculer la moyenne pondérée de la classe
+     */
+    public function getClassWeightedAvg($exam, $class_id, $year)
+    {
+        $students = Mark::where([
+            'exam_id' => $exam->id, 
+            'my_class_id' => $class_id, 
+            'year' => $year
+        ])->select('student_id')->distinct()->get();
+
+        if ($students->count() == 0) {
+            return 0;
+        }
+
+        $totalAverage = 0;
+        $validStudents = 0;
+
+        foreach ($students as $student) {
+            $avg = $this->getExamWeightedAvgTerm($exam, $student->student_id, $class_id, null, $year);
+            if ($avg > 0) {
+                $totalAverage += $avg;
+                $validStudents++;
+            }
+        }
+
+        return $validStudents > 0 ? round($totalAverage / $validStudents, 2) : 0;
     }
 
     public function getPos($st_id, $exam, $class_id, $sec_id, $year)

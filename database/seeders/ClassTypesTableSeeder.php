@@ -17,18 +17,39 @@ class ClassTypesTableSeeder extends Seeder
         // Vide complètement la table
         DB::table('class_types')->delete();
 
-        // Types de classes en français avec leurs codes
-        $typesDeClasse = [
-            ['name' => 'Crèche', 'code' => 'C'],
-            ['name' => 'Petite section', 'code' => 'PS'],
-            ['name' => 'Moyenne section', 'code' => 'MS'],
-            ['name' => 'Grande section', 'code' => 'GS'],
-            ['name' => 'Primaire', 'code' => 'P'],
-            ['name' => 'Collège (1er cycle)', 'code' => 'J'],
-            ['name' => 'Lycée (2e cycle)', 'code' => 'S'],
+        // Nouvelles catégories selon la structure demandée
+        $categories = [
+            [
+                'name' => 'Jardin d\'enfant',
+                'code' => 'JARDIN',
+                'description' => 'Classes de maternelle et crèche',
+                'order' => 1,
+                'active' => true
+            ],
+            [
+                'name' => 'Primaire',
+                'code' => 'PRIMAIRE',
+                'description' => 'Classes du primaire (CI à CM2)',
+                'order' => 2,
+                'active' => true
+            ],
+            [
+                'name' => 'Collège',
+                'code' => 'COLLEGE',
+                'description' => 'Classes du collège (6ème à 3ème)',
+                'order' => 3,
+                'active' => true
+            ],
+            [
+                'name' => 'Lycée',
+                'code' => 'LYCEE',
+                'description' => 'Classes du lycée (Seconde à Terminale) avec séries',
+                'order' => 4,
+                'active' => true
+            ],
         ];
 
         // Insertion dans la base de données
-        DB::table('class_types')->insert($typesDeClasse);
+        DB::table('class_types')->insert($categories);
     }
 }

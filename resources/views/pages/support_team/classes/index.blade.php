@@ -22,7 +22,7 @@
                                 <th>S/N</th>
                                 <th>Nom</th>
                                 <th>Type de Classe</th>
-                                <th>Série</th>
+                                <th>Nécessite Série</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -33,12 +33,10 @@
                                     <td>{{ $c->getFullName() }}</td>
                                     <td>{{ $c->class_type->name }}</td>
                                     <td>
-                                        @if($c->series)
-                                            <span class="badge badge-{{ $c->series->type === 'générale' ? 'primary' : 'success' }}">
-                                                {{ $c->series->name }}
-                                            </span>
+                                        @if($c->requires_series)
+                                            <span class="badge badge-warning">Oui</span>
                                         @else
-                                            <span class="text-muted">-</span>
+                                            <span class="badge badge-secondary">Non</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
@@ -102,15 +100,15 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row" id="series_group" style="display: none;">
-                                    <label for="series_id" class="col-lg-3 col-form-label font-weight-semibold">Série</label>
+                                <div class="form-group row">
+                                    <label for="requires_series" class="col-lg-3 col-form-label font-weight-semibold">Nécessite Série</label>
                                     <div class="col-lg-9">
-                                        <select data-placeholder="Sélectionner une série" class="form-control select" name="series_id" id="series_id">
-                                            <option value=""></option>
-                                            @foreach($series as $serie)
-                                                <option {{ old('series_id') == $serie->id ? 'selected' : '' }} value="{{ $serie->id }}">{{ $serie->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="requires_series" id="requires_series" value="1" {{ old('requires_series') ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="requires_series">
+                                                Cette classe nécessite une série (ex: 1ère, Terminale)
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -130,27 +128,7 @@
 @section('scripts')
 <script>
 $(document).ready(function() {
-    // Fonction pour afficher/masquer le champ série selon le type de classe
-    function toggleSeriesField() {
-        const classTypeSelect = $('#class_type_id');
-        const seriesGroup = $('#series_group');
-        const selectedOption = classTypeSelect.find('option:selected');
-        const classTypeName = selectedOption.text();
-        
-        // Afficher le champ série seulement pour les classes de Lycée
-        if (classTypeName.includes('Lycée') || classTypeName.includes('2e cycle')) {
-            seriesGroup.show();
-        } else {
-            seriesGroup.hide();
-            $('#series_id').val('').trigger('change');
-        }
-    }
-
-    // Écouter les changements sur le select du type de classe
-    $('#class_type_id').on('change', toggleSeriesField);
-    
-    // Initialiser l'état du champ série
-    toggleSeriesField();
+    // Le formulaire est maintenant simplifié sans gestion des séries
 });
 </script>
 @endsection

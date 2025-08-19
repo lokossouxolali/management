@@ -6,14 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Series extends Model
 {
-    protected $fillable = ['name', 'code', 'type', 'description', 'active'];
+    protected $fillable = [
+        'name', 
+        'code', 
+        'type', 
+        'domain', 
+        'description', 
+        'active', 
+        'order'
+    ];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'order' => 'integer'
+    ];
 
     /**
-     * Relation avec les classes
+     * Relation avec les classes complètes
      */
-    public function my_classes()
+    public function class_sections()
     {
-        return $this->hasMany(MyClass::class);
+        return $this->hasMany(ClassSection::class);
     }
 
     /**
@@ -21,28 +34,62 @@ class Series extends Model
      */
     public static function getActiveSeries()
     {
-        return self::where('active', true)->orderBy('type')->orderBy('name')->get();
+        return self::where('active', true)->orderBy('domain')->orderBy('order')->get();
     }
 
     /**
-     * Obtenir les séries générales
+     * Obtenir les séries par domaine
      */
-    public static function getGeneralSeries()
+    public static function getSeriesByDomain()
     {
         return self::where('active', true)
-                   ->where('type', 'générale')
-                   ->orderBy('name')
+                   ->orderBy('domain')
+                   ->orderBy('order')
+                   ->get()
+                   ->groupBy('domain');
+    }
+
+    /**
+     * Obtenir les séries scientifiques
+     */
+    public static function getScientificSeries()
+    {
+        return self::where('active', true)
+                   ->where('domain', 'Scientifique')
+                   ->orderBy('order')
                    ->get();
     }
 
     /**
-     * Obtenir les séries techniques
+     * Obtenir les séries littéraires
      */
-    public static function getTechnicalSeries()
+    public static function getLiterarySeries()
     {
         return self::where('active', true)
-                   ->where('type', 'technique')
-                   ->orderBy('name')
+                   ->where('domain', 'Littéraire')
+                   ->orderBy('order')
+                   ->get();
+    }
+
+    /**
+     * Obtenir les séries techniques industrielles
+     */
+    public static function getTechnicalIndustrialSeries()
+    {
+        return self::where('active', true)
+                   ->where('domain', 'Technique Industrielle')
+                   ->orderBy('order')
+                   ->get();
+    }
+
+    /**
+     * Obtenir les séries techniques administratives
+     */
+    public static function getTechnicalAdministrativeSeries()
+    {
+        return self::where('active', true)
+                   ->where('domain', 'Technique Administrative')
+                   ->orderBy('order')
                    ->get();
     }
 
@@ -52,5 +99,41 @@ class Series extends Model
     public function getFullName()
     {
         return $this->name . ' (' . $this->code . ')';
+    }
+
+    /**
+     * Obtenir le nom avec domaine
+     */
+    public function getFullNameWithDomain()
+    {
+        return $this->domain . ' → ' . $this->name . ' (' . $this->code . ')';
+    }
+
+    /**
+     * Vérifier si c'est une série scientifique
+     */
+    public function isScientific()
+    {
+        return $this->domain === 'Scientifique';
+    }
+
+    /**
+     * Vérifier si c'est une série technique
+     */
+    public function isTechnical()
+    {
+        return in_array($this->domain, ['Technique Industrielle', 'Technique Administrative']);
+    }
+
+    /**
+     * Obtenir les séries par type
+     */
+    public static function getSeriesByType($type)
+    {
+        return self::where('active', true)
+                   ->where('type', $type)
+                   ->orderBy('domain')
+                   ->orderBy('order')
+                   ->get();
     }
 }

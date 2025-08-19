@@ -140,8 +140,22 @@
                     </li>
 
                     {{--Gestion des Classes--}}
-                    <li class="nav-item">
-                        <a href="{{ route('classes.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['classes.index','classes.edit']) ? 'active' : '' }}"><i class="icon-windows2"></i> <span> Classes</span></a>
+                    <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['classes.index','classes.edit', 'class-sections.index', 'class-sections.create']) ? 'nav-item-expanded' : '' }}">
+                        <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['classes.index','classes.edit', 'class-sections.index', 'class-sections.create']) ? 'active' : '' }}">
+                            <i class="icon-windows2"></i> <span>Classes</span>
+                        </a>
+                        <ul class="nav nav-group-sub">
+                            <li class="nav-item">
+                                <a href="{{ route('classes.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['classes.index','classes.edit']) ? 'active' : '' }}">
+                                    Gérer les Classes
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('class-sections.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['class-sections.index', 'class-sections.create']) ? 'active' : '' }}">
+                                    Classes Complètes
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
 
@@ -157,8 +171,22 @@
                     </li>
 
                     {{--Gestion des Matières--}}
-                    <li class="nav-item">
-                        <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Matières</span></a>
+                    <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['subjects.index', 'subjects.edit', 'coefficients.stats']) ? 'nav-item-expanded' : '' }}">
+                        <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index', 'subjects.edit', 'coefficients.stats']) ? 'active' : '' }}">
+                            <i class="icon-pin"></i> <span>Matières</span>
+                        </a>
+                        <ul class="nav nav-group-sub">
+                            <li class="nav-item">
+                                <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index', 'subjects.edit']) ? 'active' : '' }}">
+                                    Gérer les Matières
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('coefficients.stats') }}" class="nav-link {{ Route::is('coefficients.stats') ? 'active' : '' }}">
+                                    <i class="icon-stats-bars"></i> Coefficients
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endif
 

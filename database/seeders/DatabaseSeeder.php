@@ -13,20 +13,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(BloodGroupsTableSeeder::class);
-        $this->call(GradesTableSeeder::class);
-        $this->call(ClassTypesTableSeeder::class);
-        $this->call(UserTypesTableSeeder::class);
-        $this->call(SeriesTableSeeder::class);
-        $this->call(MyClassesTableSeeder::class);
-        $this->call(NationalitiesTableSeeder::class);
-        $this->call(StatesTableSeeder::class);
-        $this->call(LgasTableSeeder::class);
-        $this->call(SettingsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(SectionsTableSeeder::class);
-        $this->call(SubjectsTableSeeder::class);
-        $this->call(StudentRecordsTableSeeder::class);
-        $this->call(SkillsTableSeeder::class);
+        $this->call([
+            UserTypesTableSeeder::class,
+            ClassTypesTableSeeder::class,
+            MyClassesTableSeeder::class,
+            SeriesTableSeeder::class,
+            SectionsTableSeeder::class,
+            ClassSectionsTableSeeder::class,
+            UsersTableSeeder::class,
+            SettingsTableSeeder::class,
+            BloodGroupsTableSeeder::class,
+            StatesTableSeeder::class,
+            LgasTableSeeder::class,
+            NationalitiesTableSeeder::class,
+            SubjectsTableSeeder::class,
+            SubjectCoefficientsSeeder::class,
+            SkillsTableSeeder::class,
+            GradesTableSeeder::class,
+            StudentRecordsTableSeeder::class,
+        ]);
     }
 }

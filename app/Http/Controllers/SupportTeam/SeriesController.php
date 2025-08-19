@@ -4,24 +4,21 @@ namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\Qs;
 use App\Http\Controllers\Controller;
-use App\Repositories\MyClassRepo;
+use App\Models\Series;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-    protected $my_class;
-
-    public function __construct(MyClassRepo $my_class)
+    public function __construct()
     {
         $this->middleware('teamSA');
-        $this->my_class = $my_class;
     }
 
     public function index()
     {
-        $d['series'] = $this->my_class->getAllSeries();
-        $d['general_series'] = $this->my_class->getGeneralSeries();
-        $d['technical_series'] = $this->my_class->getTechnicalSeries();
+        $d['series'] = Series::orderBy('name')->get();
+        $d['general_series'] = Series::where('type', 'générale')->orderBy('name')->get();
+        $d['technical_series'] = Series::where('type', 'technique')->orderBy('name')->get();
         
         return view('pages.support_team.series.index', $d);
     }
@@ -49,33 +46,25 @@ class SeriesController extends Controller
         $data = $request->only(['name', 'code', 'type', 'description']);
         $data['active'] = true;
 
-        $this->my_class->createSeries($data);
+        Series::create($data);
 
         return redirect()->route('series.index')->with('flash_success', 'Série créée avec succès !');
     }
 
     public function edit($id)
     {
-        $d['serie'] = $this->my_class->findSeries($id);
+        $d['serie'] = Series::findOrFail(Qs::decodeHash($id));
         
-        if (!$d['serie']) {
-            return redirect()->route('series.index')->with('flash_danger', 'Série non trouvée.');
-        }
-
         return view('pages.support_team.series.edit', $d);
     }
 
     public function update(Request $request, $id)
     {
-        $serie = $this->my_class->findSeries($id);
-        
-        if (!$serie) {
-            return redirect()->route('series.index')->with('flash_danger', 'Série non trouvée.');
-        }
+        $serie = Series::findOrFail(Qs::decodeHash($id));
 
         $request->validate([
             'name' => 'required|string|max:100',
-            'code' => 'required|string|max:10|unique:series,code,' . $id,
+            'code' => 'required|string|max:10|unique:series,code,' . $serie->id,
             'type' => 'required|in:générale,technique',
             'description' => 'nullable|string',
             'active' => 'boolean',
@@ -90,27 +79,23 @@ class SeriesController extends Controller
         $data = $request->only(['name', 'code', 'type', 'description', 'active']);
         $data['active'] = $request->has('active');
 
-        $this->my_class->updateSeries($id, $data);
+        $serie->update($data);
 
         return redirect()->route('series.index')->with('flash_success', 'Série mise à jour avec succès !');
     }
 
     public function destroy($id)
     {
-        $serie = $this->my_class->findSeries($id);
+        $serie = Series::findOrFail(Qs::decodeHash($id));
+
+        // Vérifier si la série est utilisée par des classes complètes
+        $classesUsingSeries = $serie->class_sections()->count();
         
-        if (!$serie) {
-            return redirect()->route('series.index')->with('flash_danger', 'Série non trouvée.');
+        if ($classesUsingSeries > 0) {
+            return redirect()->route('series.index')->with('flash_danger', 'Impossible de supprimer cette série car elle est utilisée par ' . $classesUsingSeries . ' classe(s).');
         }
 
-        // Vérifier si la série est utilisée par des classes
-        $classesUsingSeries = $this->my_class->getClassesBySeries($id);
-        
-        if ($classesUsingSeries->count() > 0) {
-            return redirect()->route('series.index')->with('flash_danger', 'Impossible de supprimer cette série car elle est utilisée par ' . $classesUsingSeries->count() . ' classe(s).');
-        }
-
-        $this->my_class->deleteSeries($id);
+        $serie->delete();
 
         return redirect()->route('series.index')->with('flash_success', 'Série supprimée avec succès !');
     }
@@ -120,11 +105,11 @@ class SeriesController extends Controller
         $type = $request->get('type');
         
         if ($type === 'générale') {
-            $series = $this->my_class->getGeneralSeries();
+            $series = Series::where('type', 'générale')->where('active', true)->orderBy('name')->get();
         } elseif ($type === 'technique') {
-            $series = $this->my_class->getTechnicalSeries();
+            $series = Series::where('type', 'technique')->where('active', true)->orderBy('name')->get();
         } else {
-            $series = $this->my_class->getAllSeries();
+            $series = Series::where('active', true)->orderBy('name')->get();
         }
         
         return response()->json($series);
@@ -133,7 +118,7 @@ class SeriesController extends Controller
     public function getClassesBySeries(Request $request)
     {
         $series_id = $request->get('series_id');
-        $classes = $this->my_class->getClassesBySeries($series_id);
+        $classes = Series::find($series_id)->class_sections()->with(['section.my_class.class_type'])->get();
         
         return response()->json($classes);
     }

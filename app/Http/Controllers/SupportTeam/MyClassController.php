@@ -26,7 +26,6 @@ class MyClassController extends Controller
     {
         $d['my_classes'] = $this->my_class->all();
         $d['class_types'] = $this->my_class->getTypes();
-        $d['series'] = $this->my_class->getAllSeries();
 
         return view('pages.support_team.classes.index', $d);
     }
@@ -36,14 +35,17 @@ class MyClassController extends Controller
         $data = $req->all();
         $mc = $this->my_class->create($data);
 
-        // Create Default Section
-        $s =['my_class_id' => $mc->id,
-            'name' => 'A',
-            'active' => 1,
-            'teacher_id' => NULL,
-        ];
-
-        $this->my_class->createSection($s);
+        // Create Default Sections (A, B, C)
+        for ($i = 0; $i < 3; $i++) {
+            $sectionName = chr(65 + $i); // A, B, C
+            $s = [
+                'my_class_id' => $mc->id,
+                'name' => $sectionName,
+                'active' => 1,
+                'teacher_id' => NULL,
+            ];
+            $this->my_class->createSection($s);
+        }
 
         return Qs::jsonStoreOk();
     }
@@ -52,14 +54,13 @@ class MyClassController extends Controller
     {
         $d['c'] = $c = $this->my_class->find($id);
         $d['class_types'] = $this->my_class->getTypes();
-        $d['series'] = $this->my_class->getAllSeries();
 
         return is_null($c) ? Qs::goWithDanger('classes.index') : view('pages.support_team.classes.edit', $d) ;
     }
 
     public function update(ClassUpdate $req, $id)
     {
-        $data = $req->only(['name', 'class_type_id', 'series_id']);
+        $data = $req->only(['name', 'class_type_id', 'requires_series']);
         $this->my_class->update($id, $data);
 
         return Qs::jsonUpdateOk();

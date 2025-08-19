@@ -17,97 +17,105 @@ class SeriesTableSeeder extends Seeder
         // Vide complètement la table
         DB::table('series')->delete();
 
-        // Séries françaises (générales et techniques)
+        // Nouvelles séries selon la structure africaine demandée
         $series = [
-            // Séries générales
+            // 1. Séries Scientifiques
             [
-                'name' => 'Série S - Scientifique',
-                'code' => 'S',
+                'name' => 'Série C',
+                'code' => 'C',
                 'type' => 'générale',
-                'description' => 'Série scientifique avec spécialisation en mathématiques, physique-chimie, SVT',
-                'active' => true
+                'domain' => 'Scientifique',
+                'description' => 'Mathématiques, Physique',
+                'active' => true,
+                'order' => 1
             ],
             [
-                'name' => 'Série ES - Économique et Sociale',
-                'code' => 'ES',
+                'name' => 'Série D',
+                'code' => 'D',
                 'type' => 'générale',
-                'description' => 'Série économique et sociale avec spécialisation en sciences économiques et sociales',
-                'active' => true
-            ],
-            [
-                'name' => 'Série L - Littéraire',
-                'code' => 'L',
-                'type' => 'générale',
-                'description' => 'Série littéraire avec spécialisation en littérature, langues, philosophie',
-                'active' => true
+                'domain' => 'Scientifique',
+                'description' => 'Mathématiques, SVT, Physique-Chimie',
+                'active' => true,
+                'order' => 2
             ],
 
-            // Séries techniques
+            // 2. Séries Littéraires
             [
-                'name' => 'STI2D - Sciences et Technologies de l\'Industrie et du Développement Durable',
-                'code' => 'STI2D',
-                'type' => 'technique',
-                'description' => 'Série technique industrielle avec spécialisations en innovation technologique, énergies, architecture',
-                'active' => true
-            ],
-            [
-                'name' => 'STL - Sciences et Technologies de Laboratoire',
-                'code' => 'STL',
-                'type' => 'technique',
-                'description' => 'Série technique de laboratoire avec spécialisations en biotechnologies, sciences physiques et chimiques',
-                'active' => true
-            ],
-            [
-                'name' => 'STMG - Sciences et Technologies du Management et de la Gestion',
-                'code' => 'STMG',
-                'type' => 'technique',
-                'description' => 'Série technique de gestion avec spécialisations en gestion et finance, mercatique, ressources humaines',
-                'active' => true
-            ],
-            [
-                'name' => 'ST2S - Sciences et Technologies de la Santé et du Social',
-                'code' => 'ST2S',
-                'type' => 'technique',
-                'description' => 'Série technique de la santé et du social avec spécialisations en biologie et physiopathologie humaines',
-                'active' => true
-            ],
-            [
-                'name' => 'STD2A - Sciences et Technologies du Design et des Arts Appliqués',
-                'code' => 'STD2A',
-                'type' => 'technique',
-                'description' => 'Série technique du design et des arts appliqués',
-                'active' => true
-            ],
-            [
-                'name' => 'STAV - Sciences et Technologies de l\'Agronomie et du Vivant',
-                'code' => 'STAV',
-                'type' => 'technique',
-                'description' => 'Série technique de l\'agronomie et du vivant',
-                'active' => true
-            ],
-            [
-                'name' => 'Hôtellerie-Restauration',
-                'code' => 'HR',
-                'type' => 'technique',
-                'description' => 'Série technique de l\'hôtellerie et de la restauration',
-                'active' => true
-            ],
-            [
-                'name' => 'TMD - Techniques de la Musique et de la Danse',
-                'code' => 'TMD',
-                'type' => 'technique',
-                'description' => 'Série technique de la musique et de la danse',
-                'active' => true
+                'name' => 'Série A4',
+                'code' => 'A4',
+                'type' => 'générale',
+                'domain' => 'Littéraire',
+                'description' => 'Langues et Sciences Humaines',
+                'active' => true,
+                'order' => 1
             ],
 
-            // EXEMPLE : Pour ajouter une nouvelle série, ajoutez-la ici :
-            // [
-            //     'name' => 'Nom de votre nouvelle série',
-            //     'code' => 'CODE',
-            //     'type' => 'générale', // ou 'technique'
-            //     'description' => 'Description de votre série',
-            //     'active' => true
-            // ],
+            // 3. Séries Techniques Industrielles
+            [
+                'name' => 'Série F1',
+                'code' => 'F1',
+                'type' => 'technique',
+                'domain' => 'Technique Industrielle',
+                'description' => 'Génie civil',
+                'active' => true,
+                'order' => 1
+            ],
+            [
+                'name' => 'Série F2',
+                'code' => 'F2',
+                'type' => 'technique',
+                'domain' => 'Technique Industrielle',
+                'description' => 'Électronique',
+                'active' => true,
+                'order' => 2
+            ],
+            [
+                'name' => 'Série F3',
+                'code' => 'F3',
+                'type' => 'technique',
+                'domain' => 'Technique Industrielle',
+                'description' => 'Électrotechnique',
+                'active' => true,
+                'order' => 3
+            ],
+            [
+                'name' => 'Série F4',
+                'code' => 'F4',
+                'type' => 'technique',
+                'domain' => 'Technique Industrielle',
+                'description' => 'Mécanique',
+                'active' => true,
+                'order' => 4
+            ],
+
+            // 4. Séries Techniques Administratives et de Gestion
+            [
+                'name' => 'Série G1',
+                'code' => 'G1',
+                'type' => 'technique',
+                'domain' => 'Technique Administrative',
+                'description' => 'Secrétariat / Gestion',
+                'active' => true,
+                'order' => 1
+            ],
+            [
+                'name' => 'Série G2',
+                'code' => 'G2',
+                'type' => 'technique',
+                'domain' => 'Technique Administrative',
+                'description' => 'Comptabilité',
+                'active' => true,
+                'order' => 2
+            ],
+            [
+                'name' => 'Série G3',
+                'code' => 'G3',
+                'type' => 'technique',
+                'domain' => 'Technique Administrative',
+                'description' => 'Économie',
+                'active' => true,
+                'order' => 3
+            ],
         ];
 
         // Insertion dans la base de données

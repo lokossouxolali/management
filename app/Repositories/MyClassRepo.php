@@ -13,7 +13,7 @@ class MyClassRepo
 
     public function all()
     {
-        return MyClass::orderBy('name', 'asc')->with(['class_type', 'series'])->get();
+        return MyClass::orderBy('name', 'asc')->with(['class_type'])->get();
     }
 
     public function getMC($data)
@@ -56,53 +56,11 @@ class MyClassRepo
         return ClassType::find($this->find($class_id)->class_type_id);
     }
 
-    /************* Series *******************/
-
-    public function getAllSeries()
-    {
-        return Series::orderBy('type')->orderBy('name')->get();
-    }
-
-    public function getGeneralSeries()
-    {
-        return Series::getGeneralSeries();
-    }
-
-    public function getTechnicalSeries()
-    {
-        return Series::getTechnicalSeries();
-    }
-
-    public function findSeries($id)
-    {
-        return Series::find($id);
-    }
-
-    public function createSeries($data)
-    {
-        return Series::create($data);
-    }
-
-    public function updateSeries($id, $data)
-    {
-        return Series::find($id)->update($data);
-    }
-
-    public function deleteSeries($id)
-    {
-        return Series::destroy($id);
-    }
-
-    public function getClassesBySeries($series_id)
-    {
-        return MyClass::where('series_id', $series_id)->with(['class_type', 'series'])->get();
-    }
-
     public function getLycéeClasses()
     {
         return MyClass::whereHas('class_type', function($query) {
-            $query->where('code', 'S');
-        })->with(['class_type', 'series'])->orderBy('name')->get();
+            $query->where('code', 'LYCEE');
+        })->with(['class_type'])->orderBy('name')->get();
     }
 
     /************* Section *******************/

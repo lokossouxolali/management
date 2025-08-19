@@ -16,7 +16,10 @@ class CreateClassTypesTable extends Migration
         Schema::create('class_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('code');
+            $table->string('code', 20)->unique();
+            $table->text('description')->nullable();
+            $table->integer('order')->default(0);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

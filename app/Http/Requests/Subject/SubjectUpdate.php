@@ -21,10 +21,14 @@ class SubjectUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:3',
-            'my_class_id' => 'required',
-            'teacher_id' => 'sometimes|nullable|exists:users,id',
-            'slug' => 'nullable|string|min:3',
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:50',
+            'my_class_id' => 'required|exists:my_classes,id',
+            'teacher_id' => 'nullable|exists:users,id',
+            'coefficient' => 'required|integer|min:1|max:6',
+            'is_core_subject' => 'boolean',
+            'max_score' => 'required|numeric|min:20|max:120',
+            'description' => 'nullable|string|max:500'
         ];
     }
 
@@ -34,17 +38,29 @@ class SubjectUpdate extends FormRequest
             'my_class_id' => 'Class',
             'teacher_id' => 'Teacher',
             'slug' => 'Short Name',
+            'coefficient' => 'Coefficient',
+            'is_core_subject' => 'Matière principale',
+            'max_score' => 'Score maximum',
+            'description' => 'Description',
         ];
     }
 
     protected function getValidatorInstance()
     {
-        $input = $this->all();
-
-        $input['teacher_id'] = $input['teacher_id'] ? Qs::decodeHash($input['teacher_id']) : NULL;
-
-        $this->getInputSource()->replace($input);
-
-        return parent::getValidatorInstance();
+        $validator = parent::getValidatorInstance();
+        
+        $validator->after(function ($validator) {
+            if (!$this->has('coefficient')) {
+                $this->merge(['coefficient' => 1]);
+            }
+            if (!$this->has('is_core_subject')) {
+                $this->merge(['is_core_subject' => false]);
+            }
+            if (!$this->has('max_score')) {
+                $this->merge(['max_score' => 20]);
+            }
+        });
+        
+        return $validator;
     }
 }

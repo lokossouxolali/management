@@ -15,11 +15,13 @@ class CreateSeriesTable extends Migration
     {
         Schema::create('series', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100); // Nom de la série (ex: "Série S", "Série ES", "Série L")
-            $table->string('code', 10); // Code court (ex: "S", "ES", "L", "STI2D")
-            $table->enum('type', ['générale', 'technique'])->default('générale'); // Type de série
-            $table->text('description')->nullable(); // Description de la série
-            $table->boolean('active')->default(true); // Si la série est active
+            $table->string('name', 100);
+            $table->string('code', 10)->unique();
+            $table->enum('type', ['générale', 'technique'])->default('générale');
+            $table->string('domain', 50);
+            $table->text('description')->nullable();
+            $table->boolean('active')->default(true);
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

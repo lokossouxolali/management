@@ -15,10 +15,11 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
+            $table->string('name', 10);
             $table->unsignedInteger('my_class_id');
             $table->unsignedInteger('teacher_id')->nullable();
-            $table->tinyInteger('active')->default(0);
+            $table->text('description')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
 

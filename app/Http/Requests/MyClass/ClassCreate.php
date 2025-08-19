@@ -22,7 +22,7 @@ class ClassCreate extends FormRequest
         return [
             'name' => 'required|string|min:3',
             'class_type_id' => 'required|exists:class_types,id',
-            'series_id' => 'nullable|exists:series,id',
+            'requires_series' => 'nullable|boolean',
         ];
     }
 
@@ -30,7 +30,7 @@ class ClassCreate extends FormRequest
     {
         return  [
             'class_type_id' => 'Type de classe',
-            'series_id' => 'Série',
+            'requires_series' => 'Nécessite série',
         ];
     }
 

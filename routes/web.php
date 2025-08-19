@@ -139,8 +139,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('grades', 'GradeController');
         Route::resource('exams', 'ExamController');
         Route::resource('series', 'SeriesController');
+        Route::resource('class-sections', 'ClassSectionController');
+        Route::get('class-sections/{id}/toggle-status', 'ClassSectionController@toggleStatus')->name('class-sections.toggle-status');
 
         Route::resource('payments', 'PaymentController');
+
+        /*************** Coefficients *****************/
+        Route::group(['prefix' => 'coefficients', 'middleware' => 'teamSA'], function(){
+            Route::get('stats', 'SubjectController@coefficientStats')->name('coefficients.stats');
+            Route::post('bulk_update', 'SubjectController@bulkUpdateCoefficients')->name('coefficients.bulk_update');
+            Route::post('reset', 'SubjectController@resetCoefficients')->name('coefficients.reset');
+        });
 
     });
 
@@ -151,6 +160,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('get_class_subjects/{class_id}', 'AjaxController@get_class_subjects')->name('get_class_subjects');
         Route::get('get_series_by_type', 'SupportTeam\SeriesController@getSeriesByType')->name('get_series_by_type');
         Route::get('get_classes_by_series', 'SupportTeam\SeriesController@getClassesBySeries')->name('get_classes_by_series');
+        
+        // Routes AJAX pour les classes complètes
+        Route::get('get_classes/{class_type_id}', 'SupportTeam\ClassSectionController@getClasses')->name('get_classes');
+        Route::get('get_sections/{my_class_id}', 'SupportTeam\ClassSectionController@getSections')->name('get_sections');
+        Route::get('get_series', 'SupportTeam\ClassSectionController@getSeries')->name('get_series');
     });
 
 });
