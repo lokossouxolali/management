@@ -24,15 +24,20 @@ var DatatableButtonsHtml5 = function() {
             return;
         }
 
-        // Setting datatable defaults
+        // Setting datatable defaults (FR)
         $.extend( $.fn.dataTable.defaults, {
             autoWidth: false,
             dom: '<"datatable-header"fBl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {
-                search: '<span>Filter:</span> _INPUT_',
-                searchPlaceholder: 'Type to filter...',
-                lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                search: '<span>Filtre:</span> _INPUT_',
+                searchPlaceholder: 'Rechercher...',
+                lengthMenu: '<span>Afficher:</span> _MENU_',
+                paginate: {
+                    'first': 'Premier',
+                    'last': 'Dernier',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -65,7 +70,7 @@ var DatatableButtonsHtml5 = function() {
             buttons: [
                 {
                     extend: 'pdfHtml5',
-                    text: 'Export to PDF <i class="icon-file-pdf ml-2"></i>',
+                    text: 'Exporter en PDF <i class="icon-file-pdf ml-2"></i>',
                     className: 'btn bg-teal-400',
                     customize: function (doc) {
                         doc.content.splice(1, 0, {
@@ -86,19 +91,22 @@ var DatatableButtonsHtml5 = function() {
                 buttons: [
                     {
                         extend: 'copyHtml5',
-                        className: 'btn btn-light'
+                        className: 'btn btn-light',
+                        text: 'Copier'
                     },
                     {
                         extend: 'excelHtml5',
-                        className: 'btn btn-light'
+                        className: 'btn btn-light',
+                        text: 'Excel'
                     },
                     {
                         extend: 'pdfHtml5',
-                        className: 'btn btn-light'
+                        className: 'btn btn-light',
+                        text: 'PDF'
                     },
                     {
                         extend: 'colvis',
-                        text: '<i class="icon-three-bars"></i> Visibility',
+                        text: '<i class="icon-three-bars"></i> Colonnes',
                         className: 'btn bg-blue btn-icon dropdown-toggle'
                     }
                 ]
@@ -113,7 +121,7 @@ var DatatableButtonsHtml5 = function() {
                     {
                         extend: 'copyHtml5',
                         className: 'btn btn-light',
-                        text: '<i class="icon-copy3 mr-2"></i> Copy'
+                        text: '<i class="icon-copy3 mr-2"></i> Copier'
                     },
                     {
                         extend: 'csvHtml5',

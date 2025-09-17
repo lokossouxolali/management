@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div style="font-size: 16px;" class="col-md-10 offset-md-1">
-                                <p>Dernière modification : 4 novembre 2019</p>
+                                <p>@copyright 2025</p>
 
                                 <h4 class="font-weight-semibold">Acceptation des conditions d'utilisation</h4>
 

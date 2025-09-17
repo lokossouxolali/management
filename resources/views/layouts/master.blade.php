@@ -10,6 +10,7 @@
     <title> @yield('page_title') | {{ config('app.name') }} </title>
 
     @include('partials.inc_top')
+    @yield('styles')
 </head>
 
 <body class="{{ in_array(Route::currentRouteName(), ['payments.invoice', 'marks.tabulation', 'marks.show', 'ttr.manage', 'ttr.show']) ? 'sidebar-xs' : '' }}">

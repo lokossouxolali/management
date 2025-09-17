@@ -85,7 +85,7 @@ Vos contributions et suggestions sont les bienvenues. Veuillez utiliser Pull Req
 
 ## **Vulnérabilités de Sécurité**
 
-Si vous découvrez une vulnérabilité de sécurité dans LAV_SMS, veuillez envoyer un e-mail  via epiphanassou068@gmail.com. Toutes les vulnérabilités de sécurité seront traitées rapidement.
+Si vous découvrez une vulnérabilité de sécurité dans MANAGEMENT, veuillez envoyer un e-mail  via epiphanassou068@gmail.com. Toutes les vulnérabilités de sécurité seront traitées rapidement.
 
 ## **Contact**
 - Téléphone : +22898337866 /96986875

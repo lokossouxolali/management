@@ -1,4 +1,67 @@
+:root{
+    --brand-brown:#2b241a;
+    --brand-gold:#c49716; /* darker, professional gold */
+    --brand-gold-hover:#b18412;
+    --brand-gold-soft:rgba(196,151,22,0.10);
+}
+
 .exam-table {
     border: 1px solid #000;
     border-collapse: collapse;
 }
+
+/* App-wide navbar theming */
+.navbar.navbar-dark {
+    background-color: var(--brand-brown) !important;
+}
+.navbar.navbar-dark .navbar-brand,
+.navbar.navbar-dark .navbar-text,
+.navbar.navbar-dark .navbar-nav-link,
+.navbar.navbar-dark .navbar-nav > .nav-item > .navbar-nav-link {
+    color: #ffffff !important;
+}
+.navbar.navbar-dark .navbar-nav-link:hover,
+.navbar.navbar-dark .navbar-nav-link:focus {
+    color: var(--brand-gold) !important;
+}
+/* Toggler and icons */
+.navbar.navbar-dark .navbar-toggler,
+.navbar.navbar-dark .navbar-toggler .icon-more,
+.navbar.navbar-dark i {
+    color: #ffffff !important;
+}
+
+/* Sidebar theming */
+.sidebar.sidebar-dark.sidebar-main {
+    background-color: var(--brand-brown) !important;
+}
+.sidebar.sidebar-dark .sidebar-user .card-body { background-color: transparent; }
+.sidebar.sidebar-dark .sidebar-user .media-title,
+.sidebar.sidebar-dark .sidebar-user .font-size-xs,
+.sidebar.sidebar-dark .sidebar-user a,
+.sidebar.sidebar-dark .sidebar-user i { color: #ffffff !important; }
+
+.card-sidebar-mobile { background-color: transparent; border: 0; }
+.nav-sidebar .nav-link { color: #e0e6ed; }
+.nav-sidebar .nav-link i { color: #c7cfd6; }
+.nav-sidebar .nav-link:hover,
+.nav-sidebar .nav-link:focus { color: #ffffff; background-color: var(--brand-gold-soft); }
+.nav-sidebar .nav-item-open > .nav-link,
+.nav-sidebar .nav-link.active { color: var(--brand-brown); background-color: var(--brand-gold); }
+.nav-sidebar .nav-link.active i { color: var(--brand-brown); }
+
+.nav-sidebar .nav-group-sub { background-color: rgba(255,255,255,0.06); }
+.nav-sidebar .nav-group-sub .nav-link { color: #cfd8dc; }
+.nav-sidebar .nav-group-sub .nav-link.active { color: var(--brand-brown); background-color: var(--brand-gold); }
+
+/* Buttons palette overrides (if Bootstrap theme present) */
+.btn-primary, .btn-success, .btn-info { background-color: var(--brand-brown); border-color: var(--brand-brown); }
+.btn-primary:hover, .btn-success:hover, .btn-info:hover { background-color: #221d15; border-color: #221d15; }
+.btn-warning, .btn-secondary { background-color: var(--brand-gold); border-color: var(--brand-gold); color: var(--brand-brown); }
+.btn-warning:hover, .btn-secondary:hover { background-color: var(--brand-gold-hover); border-color: var(--brand-gold-hover); color: var(--brand-brown); }
+
+/* Links and badges */
+.badge-primary { background-color: var(--brand-brown); }
+.badge-warning { background-color: var(--brand-gold); color: var(--brand-brown); }
+.a, a { color: var(--brand-gold); }
+a:hover { color: var(--brand-gold-hover); }
