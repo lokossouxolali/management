@@ -77,12 +77,6 @@
                                         <td>{{$user->state->name }}</td>
                                     </tr>
                                 @endif
-                                @if($user->lga_id)
-                                    <tr>
-                                        <td class="font-weight-bold">Zone</td>
-                                        <td>{{$user->lga->name }}</td>
-                                    </tr>
-                                @endif
                                 @if($user->user_type == 'parent')
                                     <tr>
                                         <td class="font-weight-bold">Enfants/Gardé</td>

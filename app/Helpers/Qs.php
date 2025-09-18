@@ -87,7 +87,7 @@ class Qs
 
     public static function getUserRecord($remove = [])
     {
-        $data = ['name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address', 'bg_id', 'nal_id', 'state_id', 'lga_id'];
+        $data = ['name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address', 'bg_id', 'nal_id', 'state_id'];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
@@ -297,11 +297,10 @@ class Qs
     {
        switch($class_type){
            case 'J' : return 'junior';
-           case 'S' : return 'senior';
-           case 'N' : return 'nursery';
            case 'P' : return 'primary';
-           case 'PN' : return 'pre_nursery';
-           case 'C' : return 'creche';
+           case 'PS' : return 'pre_school';
+           case 'MS' : return 'middle_school';
+           case 'GS' : return 'great_school';
        }
         return $class_type;
     }

@@ -22,9 +22,10 @@
                         {{--Sheet Table--}}
                         @include('pages.support_team.marks.show.sheet')
 
-                        {{--Print Button--}}
+                        {{--Print Buttons--}}
                         <div class="text-center mt-3">
-                            <a target="_blank" href="{{ route('marks.print', [Qs::hash($student_id), $ex->id, $year]) }}" class="btn btn-secondary btn-lg">Print Marksheet <i class="icon-printer ml-2"></i></a>
+                            <a target="_blank" href="{{ route('marks.print', [Qs::hash($student_id), $ex->id, $year]) }}" class="btn btn-secondary btn-lg mr-2">Print Marksheet <i class="icon-printer ml-2"></i></a>
+                            <a target="_blank" href="{{ route('marks.print_madone', [Qs::hash($student_id), $ex->id, $year]) }}" class="btn btn-primary btn-lg">Bulletin Style Madone <i class="icon-printer ml-2"></i></a>
                         </div>
 
                     </div>

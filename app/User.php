@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\BloodGroup;
-use App\Models\Lga;
 use App\Models\Nationality;
 use App\Models\StaffRecord;
 use App\Models\State;
@@ -23,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'phone', 'phone2', 'dob', 'gender', 'photo', 'address', 'bg_id', 'password', 'nal_id', 'state_id', 'lga_id', 'code', 'user_type', 'email_verified_at'
+        'name', 'username', 'email', 'phone', 'phone2', 'dob', 'gender', 'photo', 'address', 'bg_id', 'password', 'nal_id', 'state_id', 'code', 'user_type', 'email_verified_at'
     ];
 
     /**
@@ -40,10 +39,6 @@ class User extends Authenticatable
         return $this->hasOne(StudentRecord::class);
     }
 
-    public function lga()
-    {
-        return $this->belongsTo(Lga::class);
-    }
 
     public function state()
     {

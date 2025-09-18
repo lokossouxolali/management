@@ -69,8 +69,8 @@ class SubjectsTableSeeder extends Seeder
             $data = [];
             
             // Ajouter les matières selon le niveau
-            if (str_contains($my_class->name, 'Crèche') || str_contains($my_class->name, 'Petite') || 
-                str_contains($my_class->name, 'Moyenne') || str_contains($my_class->name, 'Grande')) {
+            if (str_contains($my_class->name, 'Petite') || str_contains($my_class->name, 'Moyenne') || 
+                str_contains($my_class->name, 'Grande')) {
                 // Maternelle - matières de base
                 $data = [
                     ['name' => $subjects[0], 'slug' => $sub_slug[0], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
@@ -107,25 +107,6 @@ class SubjectsTableSeeder extends Seeder
                     ['name' => $subjects[10], 'slug' => $sub_slug[10], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
                     ['name' => $subjects[11], 'slug' => $sub_slug[11], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
                     ['name' => $subjects[12], 'slug' => $sub_slug[12], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                ];
-            } else {
-                // Lycée - matières du lycée
-                $data = [
-                    ['name' => $subjects[0], 'slug' => $sub_slug[0], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[1], 'slug' => $sub_slug[1], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[2], 'slug' => $sub_slug[2], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[7], 'slug' => $sub_slug[7], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[8], 'slug' => $sub_slug[8], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[4], 'slug' => $sub_slug[4], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[5], 'slug' => $sub_slug[5], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[6], 'slug' => $sub_slug[6], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[9], 'slug' => $sub_slug[9], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[10], 'slug' => $sub_slug[10], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[11], 'slug' => $sub_slug[11], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[12], 'slug' => $sub_slug[12], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[13], 'slug' => $sub_slug[13], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[14], 'slug' => $sub_slug[14], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
-                    ['name' => $subjects[15], 'slug' => $sub_slug[15], 'my_class_id' => $my_class->id, 'teacher_id' => $teacher_id],
                 ];
             }
 

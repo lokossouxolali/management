@@ -91,12 +91,6 @@
                                 <td>{{$sr->user->state->name }}</td>
                             </tr>
                             @endif
-                            @if($sr->user->lga_id)
-                            <tr>
-                                <td class="font-weight-bold">LGA</td>
-                                <td>{{$sr->user->lga->name }}</td>
-                            </tr>
-                            @endif
 
 
                             </tbody>

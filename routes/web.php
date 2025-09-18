@@ -44,42 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('reset_pass/{id}', 'UserController@reset_pass')->name('users.reset_pass');
         });
 
-        /*************** TimeTables *****************/
-        Route::group(['prefix' => 'timetables'], function(){
-            Route::get('/', 'TimeTableController@index')->name('tt.index');
 
-            Route::group(['middleware' => 'teamSA'], function() {
-                Route::post('/', 'TimeTableController@store')->name('tt.store');
-                Route::put('/{tt}', 'TimeTableController@update')->name('tt.update');
-                Route::delete('/{tt}', 'TimeTableController@delete')->name('tt.delete');
-            });
-
-            /*************** TimeTable Records *****************/
-            Route::group(['prefix' => 'records'], function(){
-
-                Route::group(['middleware' => 'teamSA'], function(){
-                    Route::get('manage/{ttr}', 'TimeTableController@manage')->name('ttr.manage');
-                    Route::post('/', 'TimeTableController@store_record')->name('ttr.store');
-                    Route::get('edit/{ttr}', 'TimeTableController@edit_record')->name('ttr.edit');
-                    Route::put('/{ttr}', 'TimeTableController@update_record')->name('ttr.update');
-                });
-
-                Route::get('show/{ttr}', 'TimeTableController@show_record')->name('ttr.show');
-                Route::get('print/{ttr}', 'TimeTableController@print_record')->name('ttr.print');
-                Route::delete('/{ttr}', 'TimeTableController@delete_record')->name('ttr.destroy');
-
-            });
-
-            /*************** Time Slots *****************/
-            Route::group(['prefix' => 'time_slots', 'middleware' => 'teamSA'], function(){
-                Route::post('/', 'TimeTableController@store_time_slot')->name('ts.store');
-                Route::post('/use/{ttr}', 'TimeTableController@use_time_slot')->name('ts.use');
-                Route::get('edit/{ts}', 'TimeTableController@edit_time_slot')->name('ts.edit');
-                Route::delete('/{ts}', 'TimeTableController@delete_time_slot')->name('ts.destroy');
-                Route::put('/{ts}', 'TimeTableController@update_time_slot')->name('ts.update');
-            });
-
-        });
 
         /*************** Payments *****************/
         Route::group(['prefix' => 'payments'], function(){
@@ -128,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('select_year/{id}', 'MarkController@year_selected')->name('marks.year_select');
             Route::get('show/{id}/{year}', 'MarkController@show')->name('marks.show');
             Route::get('print/{id}/{exam_id}/{year}', 'MarkController@print_view')->name('marks.print');
+            Route::get('print_madone/{id}/{exam_id}/{year}', 'MarkController@print_bulletin_madone')->name('marks.print_madone');
 
         });
 
@@ -145,7 +111,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     /************************ AJAX ****************************/
     Route::group(['prefix' => 'ajax'], function() {
-        Route::get('get_lga/{state_id}', 'AjaxController@get_lga')->name('get_lga');
         Route::get('get_class_sections/{class_id}', 'AjaxController@get_class_sections')->name('get_class_sections');
         Route::get('get_class_subjects/{class_id}', 'AjaxController@get_class_subjects')->name('get_class_subjects');
     });
